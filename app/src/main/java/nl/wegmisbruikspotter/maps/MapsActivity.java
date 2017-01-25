@@ -98,17 +98,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     /**
-     * Called when the user clicks the spotnu button
+     * Called when the user clicks the Selecter positie button.
      */
-    public void Spot(View view) {
+    public void Select(View view) {
 
         //Save locations and return to mainactivity
-
-
-        //Send variables to next activity
         Intent intent = new Intent(this, MainActivity.class);
-        //intent.putExtra("latitude", lat.toString());
-        //intent.putExtra("longitude", lng.toString());
         ((Globals) this.getApplication()).setlatitude(lat.toString());
         ((Globals) this.getApplication()).setlongitude(lng.toString());
         startActivity(intent);

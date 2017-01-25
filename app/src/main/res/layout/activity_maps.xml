@@ -24,6 +24,6 @@
         android:id="@+id/button2"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="Spot" />
+        android:onClick="Select (MapsActivity)" />
 
 </RelativeLayout>

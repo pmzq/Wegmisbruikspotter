@@ -2,14 +2,9 @@ package nl.wegmisbruikspotter.maps;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,8 +23,6 @@ import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import static android.R.attr.bitmap;
-
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,76 +37,6 @@ public class MainActivity extends AppCompatActivity
     Double lat;
     Double lng;
     Context context = this;
-
-    /**
-     * Called when the user clicks the spotnu button
-     */
-    public void Selecteer(View view) {
-
-        //Retreived filled in values
-        Spinner ergernis_spinner = (Spinner) findViewById(R.id.ergernis);
-        String ergernis = ergernis_spinner.getSelectedItem().toString();
-
-        Spinner merk_spinner = (Spinner) findViewById(R.id.Merk);
-        String merk = merk_spinner.getSelectedItem().toString();
-
-        EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
-        String kenteken = kenteken_text.getText().toString();
-
-        EditText description_text = (EditText) findViewById(R.id.description);
-        String description = description_text.getText().toString();
-
-        //Make variables global
-        ((Globals) this.getApplication()).setkenteken(kenteken);
-        ((Globals) this.getApplication()).setergernis(ergernis);
-        ((Globals) this.getApplication()).setmerk(merk);
-        ((Globals) this.getApplication()).setdescription(description);
-
-        //Check if Ergenis has been selected
-        if (ergernis.equals("Selecteer Ergernis")) {
-
-            Context context = getApplicationContext();
-            CharSequence text = "Selecteer een Ergernis";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            // Ergenis.setError( "Selecteer een " );
-
-        } else if (kenteken.equals("")) {
-
-            Context context = getApplicationContext();
-            CharSequence text = "Vul het kenteken in";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-
-        } else if (description.equals("")) {
-
-            Context context = getApplicationContext();
-            CharSequence text = "Vul een omschrijving in";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-
-        }else {
-            //Send variables to next activity
-            Intent intent = new Intent(this, MapsActivity.class);
-            // set
-
-
-            //intent.putExtra("kenteken", kenteken);
-            //intent.putExtra("ergernis", ergernis);
-            //intent.putExtra("merk", merk);
-            //intent.putExtra("description", description);
-            startActivity(intent);
-        }
-
-    }
-
-
 
 
     @Override
@@ -228,14 +151,27 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private static final int PICK_PHOTO_FOR_AVATAR = 0;
+    /**
+     * Called when the user clicks the Selecteer locatie button
+     */
+    public void Selecteer(View view) {
 
+            //Show maps acitvity to select position.
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
+
+    }
+
+    private static final int PICK_PHOTO_FOR_AVATAR = 0;
+    //Used for adding an image
     public void pickImage(View View) {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, PICK_PHOTO_FOR_AVATAR);
     }
 
+    //Function to get the result of the specified requestCode
+    //0 = Retreive image and add it to foto imageView
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -260,17 +196,60 @@ public class MainActivity extends AppCompatActivity
 
     public void Spot(View view) {
 
-        //Place final Spot on website.
+        //Retreived filled in values
+        Spinner ergernis_spinner = (Spinner) findViewById(R.id.ergernis);
+        String ergernis = ergernis_spinner.getSelectedItem().toString();
 
-        //latitude = lat.toString();
-        //longitude = lng.toString();
-        //new SigninActivity(this,1).execute(kenteken,ergernis,merk,description,latitude,longitude);
-        Context context1 = getApplicationContext();
-        int duration1 = Toast.LENGTH_SHORT;
-        String latitude = ((Globals) this.getApplication()).getlatitude();
+        Spinner merk_spinner = (Spinner) findViewById(R.id.Merk);
+        String merk = merk_spinner.getSelectedItem().toString();
 
-        Toast toast1 = Toast.makeText(context1, latitude, duration1);
-        toast1.show();
+        EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
+        String kenteken = kenteken_text.getText().toString();
+
+        EditText description_text = (EditText) findViewById(R.id.description);
+        String description = description_text.getText().toString();
+
+        //Make variables globally available
+        ((Globals) this.getApplication()).setkenteken(kenteken);
+        ((Globals) this.getApplication()).setergernis(ergernis);
+        ((Globals) this.getApplication()).setmerk(merk);
+        ((Globals) this.getApplication()).setdescription(description);
+
+        //Check if Ergenis has been selected
+        if (ergernis.equals("")) {
+
+            Context context = getApplicationContext();
+            CharSequence text = "Selecteer een Ergernis";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            // Ergenis.setError( "Selecteer een " );
+
+        } else if (kenteken.equals("")) {
+
+            Context context = getApplicationContext();
+            CharSequence text = "Vul het kenteken in";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
+        } else if (description.equals("")) {
+
+            Context context = getApplicationContext();
+            CharSequence text = "Vul een omschrijving in";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
+        }else {
+            //Place final Spot on website.
+            String latitude = ((Globals) this.getApplication()).getlatitude();
+            String longitude = ((Globals) this.getApplication()).getlongitude();
+            new NewSpotActivity(this, 1).execute(kenteken, ergernis, merk, description, latitude, longitude);
+        }
     }
 
 }

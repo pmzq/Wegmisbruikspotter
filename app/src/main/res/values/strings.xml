@@ -11,4 +11,5 @@
     <string name="Merk">Merk</string>
     <string name="Ergenis">Ergenis</string>
     <string name="Selecteer_locatie">Selecteer locatie</string>
+    <string name="title_activity_all_spots">All Spots</string>
 </resources>
