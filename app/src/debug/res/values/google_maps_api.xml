@@ -1,0 +1,19 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=23:E9:F0:E1:11:EE:33:68:DD:FC:6E:92:B0:0D:C2:8E:69:19:32:CD%3Bnl.wegmisbruikspotter.maps
+
+    You can also add your credentials to an existing key, using this line:
+    23:E9:F0:E1:11:EE:33:68:DD:FC:6E:92:B0:0D:C2:8E:69:19:32:CD;nl.wegmisbruikspotter.maps
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBf9l-pWppmnHx4x2wzw6VGXgnx6ZDkENY</string>
+</resources>
