@@ -118,7 +118,8 @@
             android:layout_alignBaseline="@+id/button"
             android:layout_alignBottom="@+id/button"
             android:layout_alignRight="@+id/description"
-            android:layout_alignEnd="@+id/description" />
+            android:layout_alignEnd="@+id/description"
+            android:onClick="pickImage" />
 
         <Button
             android:text="Spot nu!"
@@ -132,13 +133,27 @@
             android:backgroundTint="?android:attr/colorPressedHighlight"
             android:onClick="Spot" />
 
-        <Spinner
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@color/cast_intro_overlay_background_color"
+            android:layout_below="@+id/button3"
+            android:layout_toRightOf="@+id/button4"
+            android:layout_toEndOf="@+id/button4"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp"
+            android:id="@+id/foto" />
+
+        <EditText
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/button4"
-            android:layout_alignLeft="@+id/button"
-            android:layout_alignStart="@+id/button"
-            android:id="@+id/spinner" />
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:ems="10"
+            android:layout_below="@+id/button"
+            android:layout_toLeftOf="@+id/button3"
+            android:layout_toStartOf="@+id/button3"
+            android:id="@+id/result" />
 
 </RelativeLayout>
 

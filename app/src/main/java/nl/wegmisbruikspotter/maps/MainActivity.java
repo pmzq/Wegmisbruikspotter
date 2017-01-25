@@ -2,7 +2,12 @@ package nl.wegmisbruikspotter.maps;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -16,8 +21,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import static android.R.attr.bitmap;
 
 
 public class MainActivity extends AppCompatActivity
@@ -32,12 +43,14 @@ public class MainActivity extends AppCompatActivity
     String longitude;
     Double lat;
     Double lng;
+    Context context = this;
 
     /**
      * Called when the user clicks the spotnu button
      */
     public void Selecteer(View view) {
 
+        //Retreived filled in values
         Spinner ergernis_spinner = (Spinner) findViewById(R.id.ergernis);
         String ergernis = ergernis_spinner.getSelectedItem().toString();
 
@@ -49,6 +62,12 @@ public class MainActivity extends AppCompatActivity
 
         EditText description_text = (EditText) findViewById(R.id.description);
         String description = description_text.getText().toString();
+
+        //Make variables global
+        ((Globals) this.getApplication()).setkenteken(kenteken);
+        ((Globals) this.getApplication()).setergernis(ergernis);
+        ((Globals) this.getApplication()).setmerk(merk);
+        ((Globals) this.getApplication()).setdescription(description);
 
         //Check if Ergenis has been selected
         if (ergernis.equals("Selecteer Ergernis")) {
@@ -83,10 +102,7 @@ public class MainActivity extends AppCompatActivity
             //Send variables to next activity
             Intent intent = new Intent(this, MapsActivity.class);
             // set
-            ((Globals) this.getApplication()).setkenteken(kenteken);
-            ((Globals) this.getApplication()).setergernis(ergernis);
-            ((Globals) this.getApplication()).setmerk(merk);
-            ((Globals) this.getApplication()).setdescription(description);
+
 
             //intent.putExtra("kenteken", kenteken);
             //intent.putExtra("ergernis", ergernis);
@@ -96,6 +112,8 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
+
 
 
     @Override
@@ -210,6 +228,35 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    private static final int PICK_PHOTO_FOR_AVATAR = 0;
+
+    public void pickImage(View View) {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, PICK_PHOTO_FOR_AVATAR);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_PHOTO_FOR_AVATAR && resultCode == MainActivity.RESULT_OK) {
+            if (data == null) {
+                //Display an error
+                return;
+            }
+            try {
+                //Set selected image...
+                InputStream inputStream = context.getContentResolver().openInputStream(data.getData());
+                Bitmap newProfilePic = BitmapFactory.decodeStream(inputStream);
+                ImageView foto_image = (ImageView) findViewById(R.id.foto);
+                foto_image.setImageBitmap(newProfilePic);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     public void Spot(View view) {
 
         //Place final Spot on website.
@@ -224,5 +271,6 @@ public class MainActivity extends AppCompatActivity
         Toast toast1 = Toast.makeText(context1, latitude, duration1);
         toast1.show();
     }
+
 }
 
