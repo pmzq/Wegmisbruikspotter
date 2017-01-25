@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="Merk_array">
+        <item></item>
         <item>Alfa Romeo</item>
         <item>Aston Martin</item>
         <item>Audi</item>

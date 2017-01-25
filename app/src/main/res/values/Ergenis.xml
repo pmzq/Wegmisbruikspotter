@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="Ergernis_array">
+        <item></item>
         <item>Achteruit rijden op snelweg</item>
         <item>Asbak op straat legen</item>
         <item>Bij file via af/oprit afsnijden</item>
