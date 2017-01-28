@@ -8,6 +8,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,11 +39,11 @@ import java.net.URL;
 
 public class AllSpots extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+        public GoogleMap mMap;
 
     public static final String MY_JSON ="MY_JSON";
 
-    private static final String JSON_URL = "http://www.wegmisbruikspotter.nl/m_retreivespots.php";
+    private static final String JSON_URL = "https://wegmisbruikspotter.000webhostapp.com/m_retreivespots.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class AllSpots extends FragmentActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
 
@@ -71,11 +74,76 @@ public class AllSpots extends FragmentActivity implements OnMapReadyCallback {
         LatLng Nederland = new LatLng(52.1883501, 5.0638998);
         // mMap.addMarker(new MarkerOptions().position(Nederland).title("Marker in Nederland"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(Nederland));
-        mMap.animateCamera( CameraUpdateFactory.zoomTo( 8.0f ) );
+        mMap.animateCamera(CameraUpdateFactory.zoomTo( 8.0f ) );
         getJSON(JSON_URL);
 
+        /*//set on marker click listeners
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
+        {
+
+            @Override
+            public boolean onMarkerClick(Marker arg0) {
+                Log.i("GoogleMapActivity", "onMarkerClick");
+                Toast.makeText(getApplicationContext(),
+                        "Marker Clicked: " + arg0.getTitle(), Toast.LENGTH_SHORT)
+                        .show();
+                return true;
+            }
+
+        });
+        */
+
+        //Bus stop info window onClick event
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Context context = getApplicationContext();
+                Intent intent = new Intent(context ,Spot.class);
+                String title = marker.getTitle();
+                intent.putExtra("kenteken", title);
+                startActivity(intent);
+            }
+        });
+
+        // Setting a custom info window adapter for the google map
+        googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+            // Use default InfoWindow frame
+            @Override
+            public View getInfoWindow(Marker arg0) {
+                return null;
+            }
+
+            // Defines the contents of the InfoWindow
+            @Override
+            public View getInfoContents(Marker arg0) {
+
+                // Getting view from the layout file info_window_layout
+                View v = getLayoutInflater().inflate(R.layout.infowindowlayout, null);
+
+                // Getting the position from the marker
+                LatLng latLng = arg0.getPosition();
+
+                // Getting reference to the TextView to set latitude
+                TextView tvLat = (TextView) v.findViewById(R.id.tv_lat);
+
+                // Getting reference to the TextView to set longitude
+                TextView tvLng = (TextView) v.findViewById(R.id.tv_lng);
+
+                // Setting the latitude
+                tvLat.setText("Latitude:" + latLng.latitude);
+
+                // Setting the longitude
+                tvLng.setText("Longitude:"+ latLng.longitude);
+
+                // Returning the view containing InfoWindow contents
+                return v;
+
+            }
+        });
 
     }
+
 
     private void getJSON(String url) {
         class GetJSON extends AsyncTask<String, Void, String>{
@@ -131,7 +199,9 @@ public class AllSpots extends FragmentActivity implements OnMapReadyCallback {
                         double lat1 = Double.parseDouble(latitude);
                         double lng1 = Double.parseDouble(longitude);
 
-                        mMap.addMarker(new MarkerOptions().title(e.getString("kenteken")).position(new LatLng(lat1, lng1)));
+                        //Marker melbourne =
+                        Marker melbourne = mMap.addMarker(new MarkerOptions().title(e.getString("kenteken")).position(new LatLng(lat1, lng1)).snippet("Lees meer"));
+                        melbourne.showInfoWindow();
                     }
 
                 } catch (JSONException e) {
@@ -142,7 +212,5 @@ public class AllSpots extends FragmentActivity implements OnMapReadyCallback {
         GetJSON gj = new GetJSON();
         gj.execute(url);
     }
-
-
 
 }

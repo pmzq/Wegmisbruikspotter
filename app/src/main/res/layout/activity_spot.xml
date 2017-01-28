@@ -40,53 +40,63 @@
                 android:layout_marginTop="8dp" />
 
             <TextView
-                android:text="textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/kenteken"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentStart="false"
-                android:id="@+id/description"
-                android:layout_alignParentRight="false"
-                android:layout_alignParentEnd="false"
-                android:textSize="24sp"
-                android:background="@android:drawable/editbox_background_normal"
-                android:inputType="textMultiLine"
-                tools:layout_editor_absoluteX="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/kenteken"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/editText3"
-                android:hint="Type bericht"
-                tools:layout_editor_absoluteX="62dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:background="@android:drawable/editbox_background_normal"
-                android:textSize="30sp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp" />
-
-            <ImageButton
+                android:text="Auto merk:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/stat_notify_chat"
-                android:id="@+id/imageButton3"
-                android:layout_alignBottom="@+id/editText3"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
+                android:id="@+id/textAutoMerk"
+                android:textSize="18sp"
+                tools:textStyle="bold"
+                android:layout_below="@+id/kenteken"
+                android:layout_alignLeft="@+id/kenteken"
+                android:layout_alignStart="@+id/kenteken"
+                android:layout_marginTop="15dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@color/colorAccent"
+                android:layout_alignTop="@+id/textAutoMerk"
+                android:layout_toRightOf="@+id/textAutoMerk"
+                android:layout_marginLeft="26dp"
+                android:layout_marginStart="26dp"
+                android:id="@+id/img_merk" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textAutoMerk"
+                android:layout_alignLeft="@+id/textAutoMerk"
+                android:layout_alignStart="@+id/textAutoMerk"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="16dp"
+                android:id="@+id/foto" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/description"
+                android:background="@drawable/bubble1"
+                android:layout_marginBottom="11dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="8dp"
-                android:layout_marginRight="16dp" />
+                android:layout_alignLeft="@+id/textAutoMerk"
+                android:layout_alignStart="@+id/textAutoMerk"
+                android:layout_alignRight="@+id/kenteken"
+                android:layout_alignEnd="@+id/kenteken" />
+
+            <TextView
+                android:text="Ergernis:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textErgernis"
+                android:textSize="18sp"
+                tools:textStyle="bold"
+                android:layout_above="@+id/description"
+                android:layout_alignLeft="@+id/description"
+                android:layout_alignStart="@+id/description"
+                android:layout_marginBottom="12dp" />
 
         </RelativeLayout>
     </ScrollView>

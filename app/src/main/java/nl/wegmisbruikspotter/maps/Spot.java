@@ -3,6 +3,7 @@ package nl.wegmisbruikspotter.maps;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.EditText;
 
 public class Spot extends AppCompatActivity {
 
@@ -20,10 +21,8 @@ public class Spot extends AppCompatActivity {
 
         Intent i = getIntent();
         kenteken = i.getStringExtra("kenteken");
-        ergenis = i.getStringExtra("ergenis");
-        merk = i.getStringExtra("merk");
-        description = i.getStringExtra("description");
-        lat = i.getStringExtra("lat");
-        lng = i.getStringExtra("lng");
+
+        EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
+        kenteken_text.setText(kenteken);
     }
 }
