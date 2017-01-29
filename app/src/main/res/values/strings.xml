@@ -12,4 +12,6 @@
     <string name="Ergenis">Ergenis</string>
     <string name="Selecteer_locatie">Selecteer locatie</string>
     <string name="title_activity_all_spots">All Spots</string>
+
+    <string name="Meer_info"><u>Klik voor meer info</u></string>
 </resources>

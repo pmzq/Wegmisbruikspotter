@@ -18,7 +18,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.text.method.ScrollingMovementMethod;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,10 +41,8 @@ import java.net.URL;
 
 public class AllSpots extends FragmentActivity implements OnMapReadyCallback {
 
-        public GoogleMap mMap;
-
+    public GoogleMap mMap;
     public static final String MY_JSON ="MY_JSON";
-
     private static final String JSON_URL = "https://wegmisbruikspotter.000webhostapp.com/m_retreivespots.php";
 
     @Override
@@ -70,11 +70,12 @@ public class AllSpots extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
+        // Add a marker in Nederland
         LatLng Nederland = new LatLng(52.1883501, 5.0638998);
-        // mMap.addMarker(new MarkerOptions().position(Nederland).title("Marker in Nederland"));
+        //mMap.addMarker(new MarkerOptions().position(Nederland).title(""));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(Nederland));
         mMap.animateCamera(CameraUpdateFactory.zoomTo( 8.0f ) );
+        //Get JSON result of all spots
         getJSON(JSON_URL);
 
         /*//set on marker click listeners
@@ -93,20 +94,21 @@ public class AllSpots extends FragmentActivity implements OnMapReadyCallback {
         });
         */
 
-        //Bus stop info window onClick event
+        //Start onlcik event handler for info window
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
+                //Load spot activity when info window is clicked
                 Context context = getApplicationContext();
                 Intent intent = new Intent(context ,Spot.class);
-                String title = marker.getTitle();
-                intent.putExtra("kenteken", title);
+                String id = marker.getTitle();
+                ((Globals) getApplication()).setspotid(id);
                 startActivity(intent);
             }
         });
 
         // Setting a custom info window adapter for the google map
-        googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+       /* googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
             // Use default InfoWindow frame
             @Override
@@ -123,24 +125,30 @@ public class AllSpots extends FragmentActivity implements OnMapReadyCallback {
 
                 // Getting the position from the marker
                 LatLng latLng = arg0.getPosition();
+                String title = arg0.getTitle();
 
                 // Getting reference to the TextView to set latitude
-                TextView tvLat = (TextView) v.findViewById(R.id.tv_lat);
+                TextView tvKenteken = (TextView) v.findViewById(R.id.tv_kenteken);
 
                 // Getting reference to the TextView to set longitude
-                TextView tvLng = (TextView) v.findViewById(R.id.tv_lng);
+                TextView tvMsg = (TextView) v.findViewById(R.id.tv_msg);
 
                 // Setting the latitude
-                tvLat.setText("Latitude:" + latLng.latitude);
+                tvKenteken.setText(title);
+
+                String mystring=new String((getResources().getString(R.string.Meer_info)));
+                SpannableString content = new SpannableString(mystring);
+                content.setSpan(new UnderlineSpan(), 0, mystring.length(), 0);
 
                 // Setting the longitude
-                tvLng.setText("Longitude:"+ latLng.longitude);
+                tvMsg.setText(content);
 
                 // Returning the view containing InfoWindow contents
                 return v;
 
             }
         });
+        */
 
     }
 
@@ -194,13 +202,14 @@ public class AllSpots extends FragmentActivity implements OnMapReadyCallback {
                         JSONObject e = json.getJSONObject(i);
                         String latitude = e.getString("latitude");
                         String longitude = e.getString("longitude");
+                        //String id = e.getString("id");
 
                         //String[] point2 = point.split(",");
                         double lat1 = Double.parseDouble(latitude);
                         double lng1 = Double.parseDouble(longitude);
 
                         //Marker melbourne =
-                        Marker melbourne = mMap.addMarker(new MarkerOptions().title(e.getString("kenteken")).position(new LatLng(lat1, lng1)).snippet("Lees meer"));
+                        Marker melbourne = mMap.addMarker(new MarkerOptions().title(e.getString("id")).position(new LatLng(lat1, lng1)).snippet(getResources().getString(R.string.Meer_info)));
                         melbourne.showInfoWindow();
                     }
 

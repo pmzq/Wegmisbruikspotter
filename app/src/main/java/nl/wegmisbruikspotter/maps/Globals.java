@@ -15,6 +15,7 @@ public class Globals extends Application {
     private String description;
     private String latitude;
     private String longitude;
+    private String spotid;
 
     public String getkenteken() {
         return kenteken;
@@ -49,6 +50,13 @@ public class Globals extends Application {
     }
     public void setlatitude(String latitude) {
         this.latitude = latitude;
+    }
+
+    public String getspotid() {
+        return spotid;
+    }
+    public void setspotid(String spotid) {
+        this.spotid = spotid;
     }
 
     public String getlongitude() {

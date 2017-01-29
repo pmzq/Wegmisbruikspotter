@@ -3,18 +3,21 @@
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:orientation="vertical"
-android:background="@color/cast_expanded_controller_ad_label_background_color" >
+android:background="@android:color/holo_orange_dark" >
 <TextView
-android:id="@+id/tv_lat"
+android:id="@+id/tv_kenteken"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
-    android:padding="5dp" />
+    android:padding="3dp"
+    android:gravity="center" />
 
 <TextView
-android:id="@+id/tv_lng"
+android:id="@+id/tv_msg"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
-    android:padding="5dp" />
+    android:padding="3dp"
+    android:textColor="@color/colorPrimaryDark"
+    android:gravity="center" />
 
 
 </LinearLayout>
