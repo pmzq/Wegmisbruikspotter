@@ -22,6 +22,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 
 public class Spot extends AppCompatActivity {
@@ -42,7 +43,7 @@ public class Spot extends AppCompatActivity {
         setContentView(R.layout.activity_spot);
 
         Intent i = getIntent();
-        String id = i.getStringExtra("id");
+        //String id = i.getStringExtra("id");
 
 
 
@@ -64,15 +65,17 @@ public class Spot extends AppCompatActivity {
             protected String doInBackground(String... params) {
 
                 String uri = params[0];
-
+                String spotid = ((Globals) getApplication()).getspotid();
                 BufferedReader bufferedReader = null;
                 try {
+                    //URL url = new URL(uri);
+                    //HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     URL url = new URL(uri);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    URLConnection con = url.openConnection();
                     StringBuilder sb = new StringBuilder();
 
                     String data = URLEncoder.encode("id", "UTF-8") + "=" +
-                            URLEncoder.encode(((Globals) getApplication()).getspotid(), "UTF-8");
+                            URLEncoder.encode("205", "UTF-8");
 
                     con.setDoOutput(true);
                     OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
@@ -84,7 +87,7 @@ public class Spot extends AppCompatActivity {
 
                     String json;
                     while((json = bufferedReader.readLine())!= null){
-                        sb.append(json+"\n");
+                        sb.append(json);
                     }
 
                     return sb.toString().trim();
@@ -99,6 +102,12 @@ public class Spot extends AppCompatActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
+
+                Context context = getApplicationContext();
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, s, duration);
+                toast.show();
 
                 //textViewJSON.setText(s);
                 try {
