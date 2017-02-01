@@ -30,7 +30,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".AllSpots"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:launchMode="singleTask"

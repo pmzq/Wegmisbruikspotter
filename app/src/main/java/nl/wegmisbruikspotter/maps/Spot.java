@@ -75,7 +75,7 @@ public class Spot extends AppCompatActivity {
                     StringBuilder sb = new StringBuilder();
 
                     String data = URLEncoder.encode("id", "UTF-8") + "=" +
-                            URLEncoder.encode("205", "UTF-8");
+                            URLEncoder.encode("7209", "UTF-8");
 
                     con.setDoOutput(true);
                     OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
