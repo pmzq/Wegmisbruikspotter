@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -45,9 +46,6 @@ public class Spot extends AppCompatActivity {
         Intent i = getIntent();
         //String id = i.getStringExtra("id");
 
-
-
-
         getJSON(JSON_URL);
     }
 
@@ -75,7 +73,7 @@ public class Spot extends AppCompatActivity {
                     StringBuilder sb = new StringBuilder();
 
                     String data = URLEncoder.encode("id", "UTF-8") + "=" +
-                            URLEncoder.encode("7209", "UTF-8");
+                            URLEncoder.encode(spotid, "UTF-8");
 
                     con.setDoOutput(true);
                     OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
@@ -103,11 +101,11 @@ public class Spot extends AppCompatActivity {
                 super.onPostExecute(s);
                 loading.dismiss();
 
-                Context context = getApplicationContext();
-                int duration = Toast.LENGTH_SHORT;
+                //Context context = getApplicationContext();
+                //int duration = Toast.LENGTH_SHORT;
 
-                Toast toast = Toast.makeText(context, s, duration);
-                toast.show();
+                //Toast toast = Toast.makeText(context, s, duration);
+                //toast.show();
 
                 //textViewJSON.setText(s);
                 try {
@@ -116,7 +114,8 @@ public class Spot extends AppCompatActivity {
                     for (int i = 0; i < json.length(); i++) {
                         JSONObject e = json.getJSONObject(i);
                         String kenteken = e.getString("kenteken");
-                        String longitude = e.getString("description");
+                        String ergernis = e.getString("ergernis");
+                        String description = e.getString("description");
                         String merk = e.getString("merk");
 
 
@@ -132,6 +131,12 @@ public class Spot extends AppCompatActivity {
 
                         EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
                         kenteken_text.setText(kenteken);
+
+                        TextView ergernis_text = (TextView) findViewById(R.id.txtErgernis);
+                        ergernis_text.setText(ergernis);
+
+                        EditText description_text = (EditText) findViewById(R.id.txtDescription);
+                        description_text.setText(description);
                     }
 
                 } catch (JSONException e) {

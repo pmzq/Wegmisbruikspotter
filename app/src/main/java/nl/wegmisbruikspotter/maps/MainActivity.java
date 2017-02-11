@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity
         EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
         String kenteken = kenteken_text.getText().toString();
 
-        EditText description_text = (EditText) findViewById(R.id.description);
+        EditText description_text = (EditText) findViewById(R.id.txtDescription);
         String description = description_text.getText().toString();
 
         //Make variables globally available

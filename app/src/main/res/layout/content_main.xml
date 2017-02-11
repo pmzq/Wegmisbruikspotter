@@ -62,7 +62,7 @@
             android:layout_height="110dp"
             android:inputType="textMultiLine"
             android:ems="10"
-            android:id="@+id/description"
+            android:id="@+id/txtDescription"
 
 
             android:background="@drawable/edittext_border"
@@ -105,9 +105,9 @@
             android:onClick="Selecteer"
             android:layout_marginTop="12dp"
             android:gravity="center_vertical"
-            android:layout_below="@+id/description"
-            android:layout_alignLeft="@+id/description"
-            android:layout_alignStart="@+id/description" />
+            android:layout_below="@+id/txtDescription"
+            android:layout_alignLeft="@+id/txtDescription"
+            android:layout_alignStart="@+id/txtDescription" />
 
         <Button
             android:text="Voeg foto toe"
@@ -117,8 +117,8 @@
             android:drawableLeft="@drawable/ic_menu_camera"
             android:layout_alignBaseline="@+id/button"
             android:layout_alignBottom="@+id/button"
-            android:layout_alignRight="@+id/description"
-            android:layout_alignEnd="@+id/description"
+            android:layout_alignRight="@+id/txtDescription"
+            android:layout_alignEnd="@+id/txtDescription"
             android:onClick="pickImage" />
 
         <Button

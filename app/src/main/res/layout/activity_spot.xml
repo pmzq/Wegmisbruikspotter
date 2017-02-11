@@ -37,7 +37,8 @@
                 tools:layout_editor_absoluteX="8dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:focusable="false" />
 
             <TextView
                 android:text="Auto merk:"
@@ -72,19 +73,15 @@
                 android:layout_marginTop="16dp"
                 android:id="@+id/foto" />
 
-            <EditText
+            <TextView
+                android:text="TextView"
                 android:layout_width="wrap_content"
-                android:layout_height="150dp"
-                android:inputType="textMultiLine"
-                android:ems="10"
-                android:id="@+id/description"
-                android:background="@drawable/bubble1"
-                android:layout_marginBottom="11dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignLeft="@+id/textAutoMerk"
-                android:layout_alignStart="@+id/textAutoMerk"
-                android:layout_alignRight="@+id/kenteken"
-                android:layout_alignEnd="@+id/kenteken" />
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/textErgernis"
+                android:layout_toRightOf="@+id/textAutoMerk"
+                android:layout_toEndOf="@+id/textAutoMerk"
+                android:id="@+id/txtErgernis"
+                tools:textSize="14sp" />
 
             <TextView
                 android:text="Ergernis:"
@@ -93,10 +90,26 @@
                 android:id="@+id/textErgernis"
                 android:textSize="18sp"
                 tools:textStyle="bold"
-                android:layout_above="@+id/description"
-                android:layout_alignLeft="@+id/description"
-                android:layout_alignStart="@+id/description"
-                android:layout_marginBottom="12dp" />
+                android:layout_below="@+id/foto"
+                android:layout_alignLeft="@+id/textAutoMerk"
+                android:layout_alignStart="@+id/textAutoMerk" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="none|textMultiLine"
+                android:ems="10"
+                android:id="@+id/txtDescription"
+                android:background="@drawable/bubble1"
+                android:layout_below="@+id/textErgernis"
+                android:layout_marginTop="36dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:scrollHorizontally="false"
+                android:isScrollContainer="false"
+                android:focusable="false" />
 
         </RelativeLayout>
     </ScrollView>
