@@ -40,18 +40,6 @@
                 android:layout_marginTop="8dp"
                 android:focusable="false" />
 
-            <TextView
-                android:text="Auto merk:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textAutoMerk"
-                android:textSize="18sp"
-                tools:textStyle="bold"
-                android:layout_below="@+id/kenteken"
-                android:layout_alignLeft="@+id/kenteken"
-                android:layout_alignStart="@+id/kenteken"
-                android:layout_marginTop="15dp" />
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,26 +78,34 @@
                 android:id="@+id/textErgernis"
                 android:textSize="18sp"
                 tools:textStyle="bold"
-                android:layout_below="@+id/foto"
-                android:layout_alignLeft="@+id/textAutoMerk"
-                android:layout_alignStart="@+id/textAutoMerk" />
+                android:layout_alignTop="@+id/imgMerk"
+                android:layout_alignLeft="@+id/foto"
+                android:layout_alignStart="@+id/foto" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none|textMultiLine"
                 android:ems="10"
                 android:id="@+id/txtDescription"
                 android:background="@drawable/bubble1"
-                android:layout_below="@+id/textErgernis"
-                android:layout_marginTop="36dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
+                android:layout_marginTop="21dp"
                 android:scrollHorizontally="false"
                 android:isScrollContainer="false"
-                android:focusable="false" />
+                android:focusable="false"
+                android:layout_below="@+id/imgMerk"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                app:srcCompat="@drawable/audi"
+                android:id="@+id/imgMerk"
+                android:layout_marginTop="16dp"
+                android:layout_below="@+id/kenteken"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
     </ScrollView>

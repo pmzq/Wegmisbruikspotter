@@ -9,26 +9,22 @@
         <item>BMW</item>
         <item>Bugatti</item>
         <item>Buick</item>
-        <item>Burton</item>
+        <item>Burton</item>1
         <item>Cadillac</item>
-        <item>Carver</item>
-        <item>Caterham</item>
         <item>Chevrolet</item>
         <item>Chrysler</item>
         <item>Citroen</item>
         <item>Corvette</item>
+        <item>Daewoo</item>
         <item>Daihatsu</item>
         <item>Dodge</item>
-        <item>Donkervoort</item>
         <item>Ferrari</item>
         <item>Fiat</item>
         <item>Ford</item>
-        <item>GMC</item>
-        <item>Holden</item>
         <item>Honda</item>
         <item>Hummer</item>
         <item>Hyundai</item>
-        <item>Isuzu</item>
+        <item>Infiniti</item>
         <item>Jaguar</item>
         <item>Jeep</item>
         <item>Kia</item>
@@ -37,28 +33,22 @@
         <item>Lancia</item>
         <item>Land Rover</item>
         <item>Lexus</item>
-        <item>Lincoln</item>
         <item>Lotus</item>
-        <item>Marcos</item>
         <item>Maserati</item>
         <item>Mazda</item>
         <item>Mercedes</item>
-        <item>Mercury</item>
         <item>MG</item>
         <item>Mini</item>
         <item>Mitsubishi</item>
-        <item>Morgan</item>
+        <item>Mclaren</item>
         <item>Nissan</item>
-        <item>Oldsmobile</item>
         <item>Opel</item>
         <item>Peugeot</item>
-        <item>Pontiac</item>
         <item>Porsche</item>
         <item>Renault</item>
         <item>Rolls Royce</item>
         <item>Rover</item>
         <item>Saab</item>
-        <item>Saturn</item>
         <item>Seat</item>
         <item>Skoda</item>
         <item>Smart</item>
@@ -67,9 +57,8 @@
         <item>Subaru</item>
         <item>Suzuki</item>
         <item>Toyota</item>
-        <item>TVR</item>
+        <item>Tesla</item>
         <item>Volkswagen</item>
         <item>Volvo</item>
-        <item>Zonda</item>
     </string-array>
 </resources>

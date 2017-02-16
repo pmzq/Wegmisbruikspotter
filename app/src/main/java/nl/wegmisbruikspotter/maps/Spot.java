@@ -3,10 +3,13 @@ package nl.wegmisbruikspotter.maps;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -137,6 +140,21 @@ public class Spot extends AppCompatActivity {
 
                         EditText description_text = (EditText) findViewById(R.id.txtDescription);
                         description_text.setText(description);
+
+                        //Set merk image
+                        String merk_low = merk.toLowerCase();
+                        int resourceID = getResources().getIdentifier(merk_low, "drawable" , getPackageName());
+                        ImageView imageView = (ImageView) findViewById(R.id.imgMerk);
+                        //String test = "R.drawable." + merk;
+                        imageView.setImageResource(resourceID);
+
+                        Context context1 = getApplicationContext();
+                        int duration1 = Toast.LENGTH_SHORT;
+
+                        Toast toast1 = Toast.makeText(context1, "" + resourceID + "", duration1);
+                        toast1.show();
+                        //Toast toast2 = Toast.makeText(context1, id, duration1);
+                        //toast2.show();
                     }
 
                 } catch (JSONException e) {
