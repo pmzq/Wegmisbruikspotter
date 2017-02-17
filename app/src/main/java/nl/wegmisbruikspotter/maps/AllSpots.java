@@ -1,5 +1,6 @@
 package nl.wegmisbruikspotter.maps;
 
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -11,13 +12,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import android.content.Context;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.method.ScrollingMovementMethod;
 import android.text.style.UnderlineSpan;
@@ -39,7 +44,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class AllSpots extends FragmentActivity implements OnMapReadyCallback {
+
+public class AllSpots extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
     public GoogleMap mMap;
     public static final String MY_JSON ="MY_JSON";
@@ -48,7 +54,9 @@ public class AllSpots extends FragmentActivity implements OnMapReadyCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_spots);
+        setContentView(R.layout.activity_allspots);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -56,6 +64,38 @@ public class AllSpots extends FragmentActivity implements OnMapReadyCallback {
 
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.AllSpots) {
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context ,AllSpots.class);
+            startActivity(intent);
+            //return true;
+
+        } else if (id == R.id.SpotNu) {
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context ,MainActivity.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+
+    }
 
     /**
      * Manipulates the map once available.
@@ -221,5 +261,4 @@ public class AllSpots extends FragmentActivity implements OnMapReadyCallback {
         GetJSON gj = new GetJSON();
         gj.execute(url);
     }
-
 }

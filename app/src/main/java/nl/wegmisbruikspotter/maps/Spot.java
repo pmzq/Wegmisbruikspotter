@@ -119,7 +119,7 @@ public class Spot extends AppCompatActivity {
                         String kenteken = e.getString("kenteken");
                         String ergernis = e.getString("ergernis");
                         String description = e.getString("description");
-                        String merk = e.getString("merk");
+                        String merk_main = e.getString("merk");
 
 
                         //String id = e.getString("id");
@@ -142,16 +142,17 @@ public class Spot extends AppCompatActivity {
                         description_text.setText(description);
 
                         //Set merk image
-                        String merk_low = merk.toLowerCase();
-                        int resourceID = getResources().getIdentifier(merk_low, "drawable" , getPackageName());
+                        String merk_low = merk_main.toLowerCase();
+                        String merk = merk_low.replaceAll("\\s+","");
+                        int merk_imageID = getResources().getIdentifier(merk, "drawable" , getPackageName());
                         ImageView imageView = (ImageView) findViewById(R.id.imgMerk);
                         //String test = "R.drawable." + merk;
-                        imageView.setImageResource(resourceID);
+                        imageView.setImageResource(merk_imageID);
 
                         Context context1 = getApplicationContext();
                         int duration1 = Toast.LENGTH_SHORT;
 
-                        Toast toast1 = Toast.makeText(context1, "" + resourceID + "", duration1);
+                        Toast toast1 = Toast.makeText(context1, ergernis, duration1);
                         toast1.show();
                         //Toast toast2 = Toast.makeText(context1, id, duration1);
                         //toast2.show();

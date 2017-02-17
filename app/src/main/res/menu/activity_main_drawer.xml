@@ -3,15 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/search"
-            android:title="Zoeken"
+        <item android:id="@+id/zoeken"
+            android:title="Zoek Kenteken"
             android:icon="@drawable/ic_search_black_24dp"
             app:showAsAction="collapseActionView|ifRoom"
             android:actionViewClass="android.widget.SearchView" />
+        <item android:id="@+id/SpotNu"
+            android:title="Spot Kenteken"
+            android:icon="@drawable/ic_search_black_24dp"
+            android:actionViewClass="android.widget.SearchView" />
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/AllSpots"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="Alle spots" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"

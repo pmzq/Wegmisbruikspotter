@@ -1,10 +1,12 @@
 package nl.wegmisbruikspotter.maps;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +24,8 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+
+import static android.R.attr.fragment;
 
 
 public class MainActivity extends AppCompatActivity
@@ -104,6 +108,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -122,6 +127,16 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
+            //switch (item.getItemId()) {
+             //   case R.id.action_settings:
+             //       Context context = getApplicationContext();
+             //       Intent intent = new Intent(context ,AllSpots.class);
+        //      startActivity(intent);
+                    //return true;
+        //        default:
+            //        return super.onOptionsItemSelected(item);
+          //  }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -132,9 +147,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.AllSpots) {
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context ,AllSpots.class);
+            startActivity(intent);
+            //return true;
+
+        } else if (id == R.id.SpotNu) {
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context ,MainActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_slideshow) {
 
