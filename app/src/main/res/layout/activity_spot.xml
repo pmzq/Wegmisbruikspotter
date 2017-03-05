@@ -19,27 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:layout_height="74dp"
-                android:inputType="textCapCharacters"
-                android:ems="10"
-                android:id="@+id/kenteken"
-                android:layout_width="match_parent"
-                android:textSize="@dimen/font_size"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:background="@drawable/kentekenplaat"
-                android:cursorVisible="true"
-                android:gravity="center_vertical|center_horizontal"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                tools:layout_editor_absoluteY="129dp"
-                tools:layout_editor_absoluteX="8dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:focusable="false" />
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,7 +49,9 @@
                 tools:textStyle="bold"
                 android:layout_alignTop="@+id/imgMerk"
                 android:layout_alignLeft="@+id/foto"
-                android:layout_alignStart="@+id/foto" />
+                android:layout_alignStart="@+id/foto"
+                android:layout_above="@+id/txtDescription"
+                android:layout_marginBottom="68dp" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -105,6 +86,24 @@
                 android:layout_below="@+id/textErgernis"
                 android:layout_alignLeft="@+id/kenteken"
                 android:layout_alignStart="@+id/kenteken" />
+
+            <EditText
+                android:layout_height="74dp"
+                android:inputType="textCapCharacters"
+                android:ems="10"
+                android:id="@+id/kenteken"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/font_size"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:background="@drawable/kentekenplaat"
+                android:cursorVisible="true"
+                android:gravity="center_vertical|center_horizontal"
+                tools:layout_editor_absoluteY="129dp"
+                tools:layout_editor_absoluteX="8dp"
+                android:layout_marginTop="71dp"
+                android:focusable="false"
+                android:layout_below="@+id/foto"
+                android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
     </ScrollView>
