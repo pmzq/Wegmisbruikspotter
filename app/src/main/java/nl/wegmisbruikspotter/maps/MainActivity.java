@@ -3,10 +3,15 @@ package nl.wegmisbruikspotter.maps;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,6 +29,8 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import static android.R.attr.fragment;
 
@@ -95,7 +102,25 @@ public class MainActivity extends AppCompatActivity
         merk = i.getStringExtra("merk");
         ergernis = i.getStringExtra("ergernis");
         description = i.getStringExtra("description");
+        printKeyHash();
 
+    }
+
+    private void printKeyHash() {
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    getPackageName(), PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.i("KeyHash:",
+                        Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e("jk", "Exception(NameNotFoundException) : " + e);
+        } catch (NoSuchAlgorithmException e) {
+            Log.e("mkm", "Exception(NoSuchAlgorithmException) : " + e);
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="nl.wegmisbruikspotter.maps">
 
     <!--
@@ -8,6 +9,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".Globals"
@@ -16,7 +18,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -31,7 +35,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".MainLogin"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:launchMode="singleTask"
@@ -47,22 +51,28 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_main" />
         <activity
-        android:name=".AllSpots"
-        android:label="AllSpots"
-        android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".AllSpots"
+            android:label="AllSpots"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Spot"
             android:label="Spot"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name"
+            tools:replace="android:theme" />
         <!-- ADD THIS LINE -->
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
-        <meta-data
+         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <!-- <activity android:name=".MainLogin"></activity>-->
     </application>
 
 </manifest>
