@@ -47,6 +47,7 @@ public class MainLogin extends Activity {
         if (accessToken == null || accessToken.isExpired()) {
             //login
         } else {
+            ((Globals) getApplication()).setfacebookID(accessToken.toString());
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
@@ -59,6 +60,7 @@ public class MainLogin extends Activity {
                 //info.setText("User ID: " + loginResult.getAccessToken().getUserId() + "\n" + "Auth Token: " + loginResult.getAccessToken().getToken());
 
                 Intent intent = new Intent(MainLogin.this, MainActivity.class);
+                ((Globals) getApplication()).setfacebookID(loginResult.getAccessToken().getUserId());
                 startActivity(intent);
                 finish();
 

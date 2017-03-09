@@ -16,6 +16,7 @@ public class Globals extends Application {
     private String latitude;
     private String longitude;
     private String spotid;
+    private String facebookID;
 
     public String getkenteken() {
         return kenteken;
@@ -64,5 +65,12 @@ public class Globals extends Application {
     }
     public void setlongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    public String getfacebookID() {
+        return facebookID;
+    }
+    public void setfacebookID(String facebookID) {
+        this.facebookID = facebookID;
     }
 }
