@@ -76,6 +76,7 @@ public class NewSpotActivity extends AsyncTask<String,String,String> {
                 String description = (String) arg0[3];
                 String lat = (String) arg0[4];
                 String lng = (String) arg0[5];
+                String facebookID = (String) arg0[6];
 
                 String link = "https://wegmisbruikspotter.000webhostapp.com/m_spotnu.php";
                 String data = URLEncoder.encode("kenteken", "UTF-8") + "=" +
@@ -90,6 +91,8 @@ public class NewSpotActivity extends AsyncTask<String,String,String> {
                         URLEncoder.encode(lat, "UTF-8");
                 data += "&" + URLEncoder.encode("longitude", "UTF-8") + "=" +
                         URLEncoder.encode(lng, "UTF-8");
+                data += "&" + URLEncoder.encode("facebookID", "UTF-8") + "=" +
+                        URLEncoder.encode(facebookID, "UTF-8");
 
                 URL url = new URL(link);
                 URLConnection conn = url.openConnection();

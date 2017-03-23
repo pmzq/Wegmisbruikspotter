@@ -303,7 +303,8 @@ public class MainActivity extends AppCompatActivity
             //Place final Spot on website.
             String latitude = ((Globals) this.getApplication()).getlatitude();
             String longitude = ((Globals) this.getApplication()).getlongitude();
-            new NewSpotActivity(this, 1).execute(kenteken, ergernis, merk, description, latitude, longitude);
+            String facebookID = ((Globals) this.getApplication()).getfacebookID();
+            new NewSpotActivity(this, 1).execute(kenteken, ergernis, merk, description, latitude, longitude,facebookID);
         }
     }
 

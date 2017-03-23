@@ -35,7 +35,6 @@ public class MainLogin extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_login);
 
@@ -51,7 +50,9 @@ public class MainLogin extends Activity {
         Profile profile = Profile.getCurrentProfile();
         if (profile != null) {
             Log.v(TAG, "Logged, user name=" + profile.getFirstName() + " " + profile.getLastName());
-            ((Globals) getApplication()).setfacebookID(profile.getFirstName());
+            String facebookID = AccessToken.getCurrentAccessToken().getUserId();
+            ((Globals) getApplication()).setfacebookName(profile.getFirstName());
+            ((Globals) getApplication()).setfacebookID(facebookID);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {
@@ -74,6 +75,8 @@ public class MainLogin extends Activity {
                             // profile2 is the new profile
                             Log.v("facebook - profile", profile2.getFirstName());
                             Intent intent = new Intent(MainLogin.this, MainActivity.class);
+                            String facebookID = AccessToken.getCurrentAccessToken().getUserId();
+                            ((Globals) getApplication()).setfacebookID(facebookID);
                             Log.v(TAG, "Logged, user name=" + profile2.getFirstName());
                             ((Globals) getApplication()).setfacebookID(profile2.getFirstName());
                             startActivity(intent);
@@ -87,7 +90,9 @@ public class MainLogin extends Activity {
                     Profile profile = Profile.getCurrentProfile();
                     Log.v("facebook - profile", profile.getFirstName());
                     Log.v(TAG, "Logged, user name=" + profile.getFirstName());
-                    ((Globals) getApplication()).setfacebookID(profile.getFirstName());
+                    String facebookID = AccessToken.getCurrentAccessToken().getUserId();
+                    ((Globals) getApplication()).setfacebookID(facebookID);
+                    ((Globals) getApplication()).setfacebookName(profile.getFirstName());
                     Intent intent = new Intent(MainLogin.this, MainActivity.class);
                     startActivity(intent);
                 }
