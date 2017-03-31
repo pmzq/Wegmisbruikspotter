@@ -65,14 +65,14 @@ public class MainLogin extends Activity {
             }
         });*/
 
-        test = AccessToken.getCurrentAccessToken();
+        /*test = AccessToken.getCurrentAccessToken();
 
         if (test != null) {
             Log.v(TAG, "YES");
         }   else {
             Log.v(TAG, "NO!");
         }
-
+*/
         Profile profile = Profile.getCurrentProfile();
         if (profile != null) {
             Log.v(TAG, "Logged, user name=" + profile.getFirstName() + " " + profile.getLastName());
@@ -85,8 +85,8 @@ public class MainLogin extends Activity {
             Log.v(TAG, "Logged, user name=");
         }
 
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("public_profile");
+        /*LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("public_profile");*/
         callbackManager = CallbackManager.Factory.create();
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             private ProfileTracker mProfileTracker;
@@ -101,8 +101,8 @@ public class MainLogin extends Activity {
                             Intent intent = new Intent(MainLogin.this, MainActivity.class);
                             String facebookID = getCurrentAccessToken().getUserId();
                             ((Globals) getApplication()).setfacebookID(facebookID);
+                            ((Globals) getApplication()).setfacebookName(profile.getFirstName());
                             Log.v(TAG, "Logged, user name=" + profile2.getFirstName());
-                            ((Globals) getApplication()).setfacebookID(profile2.getFirstName());
                             startActivity(intent);
                             mProfileTracker.stopTracking();
                         }

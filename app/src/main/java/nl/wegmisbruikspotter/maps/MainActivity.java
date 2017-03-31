@@ -57,12 +57,12 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String facebookID = ((Globals) this.getApplication()).getfacebookID();
+        String facebookName = ((Globals) this.getApplication()).getfacebookName();
 
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, facebookID, duration);
+        Toast toast = Toast.makeText(context, facebookName, duration);
         toast.show();
 
         //EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
