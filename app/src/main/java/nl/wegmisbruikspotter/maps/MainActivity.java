@@ -57,13 +57,13 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String facebookName = ((Globals) this.getApplication()).getfacebookName();
+        //String facebookName = ((Globals) this.getApplication()).getfacebookName();
 
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
+        //Context context = getApplicationContext();
+        //int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, facebookName, duration);
-        toast.show();
+        //Toast toast = Toast.makeText(context, facebookName, duration);
+        //toast.show();
 
         //EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
         //kenteken_text.requestFocus();
@@ -106,10 +106,25 @@ public class MainActivity extends AppCompatActivity
 
         //Retreive filled in fields when already filled in.
         Intent i = getIntent();
-        kenteken = i.getStringExtra("kenteken");
-        merk = i.getStringExtra("merk");
-        ergernis = i.getStringExtra("ergernis");
-        description = i.getStringExtra("description");
+        //kenteken = i.getStringExtra("kenteken");
+        kenteken =  ((Globals) this.getApplication()).getkenteken();
+        EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
+        kenteken_text.setText(kenteken);
+
+        merk = ((Globals) this.getApplication()).getmerk();
+        Spinner merk_spinner = (Spinner) findViewById(R.id.Merk);
+        //Set the merk_spinner to a previous selected value
+        selectValue(merk_spinner, merk);
+
+        //ergernis = i.getStringExtra("ergernis");
+        ergernis = ((Globals) this.getApplication()).getergernis();
+        Spinner ergernis_spinner = (Spinner) findViewById(R.id.ergernis);
+        //Set the merk_spinner to a previous selected value
+        selectValue(ergernis_spinner, ergernis);
+
+        description = ((Globals) this.getApplication()).getdescription();
+        EditText description_text = (EditText) findViewById(R.id.txtDescription);
+        description_text.setText(description);
         printKeyHash();
 
     }
@@ -211,6 +226,24 @@ public class MainActivity extends AppCompatActivity
      */
     public void Selecteer(View view) {
 
+            //Retreived filled in values
+            Spinner ergernis_spinner = (Spinner) findViewById(R.id.ergernis);
+            String ergernis = ergernis_spinner.getSelectedItem().toString();
+
+            Spinner merk_spinner = (Spinner) findViewById(R.id.Merk);
+            String merk = merk_spinner.getSelectedItem().toString();
+
+            EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
+            String kenteken = kenteken_text.getText().toString();
+
+            EditText description_text = (EditText) findViewById(R.id.txtDescription);
+            String description = description_text.getText().toString();
+
+            ((Globals) getApplication()).setergernis(ergernis);
+            ((Globals) getApplication()).setmerk(merk);
+            ((Globals) getApplication()).setkenteken(kenteken);
+            ((Globals) getApplication()).setdescription(description);
+
             //Show maps acitvity to select position.
             Intent intent = new Intent(this, MapsActivity.class);
             startActivity(intent);
@@ -305,6 +338,16 @@ public class MainActivity extends AppCompatActivity
             String longitude = ((Globals) this.getApplication()).getlongitude();
             String facebookID = ((Globals) this.getApplication()).getfacebookID();
             new NewSpotActivity(this, 1).execute(kenteken, ergernis, merk, description, latitude, longitude,facebookID);
+        }
+    }
+
+    //This module is used to load the correct value for a spinner.
+    private void selectValue(Spinner spinner, Object value) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).equals(value)) {
+                spinner.setSelection(i);
+                break;
+            }
         }
     }
 
