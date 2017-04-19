@@ -193,12 +193,12 @@ public class Spot extends AppCompatActivity implements NavigationView.OnNavigati
                         description_text.setText(description);
 
                         //Set merk image
-                        String merk_low = merk_main.toLowerCase();
-                        String merk = merk_low.replaceAll("\\s+","");
-                        int merk_imageID = getResources().getIdentifier(merk, "drawable" , getPackageName());
-                        ImageView imageView = (ImageView) findViewById(R.id.imgMerk);
+                        //String merk_low = merk_main.toLowerCase();
+                        //String merk = merk_low.replaceAll("\\s+","");
+                        //int merk_imageID = getResources().getIdentifier(merk, "drawable" , getPackageName());
+                        //ImageView imageView = (ImageView) findViewById(R.id.imgMerk);
                         //String test = "R.drawable." + merk;
-                        imageView.setImageResource(merk_imageID);
+                        //imageView.setImageResource(merk_imageID);
 
                         Context context1 = getApplicationContext();
                         int duration1 = Toast.LENGTH_SHORT;

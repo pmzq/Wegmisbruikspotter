@@ -64,7 +64,7 @@ public class NewSpotActivity extends AsyncTask<String,String,String> {
 
                 in.close();
                 //return sb.toString();
-                return "test";
+                //return "test";
             } catch (Exception e) {
                 return new String("Exception: " + e.getMessage());
             }
@@ -94,6 +94,8 @@ public class NewSpotActivity extends AsyncTask<String,String,String> {
                 data += "&" + URLEncoder.encode("facebookID", "UTF-8") + "=" +
                         URLEncoder.encode(facebookID, "UTF-8");
 
+                //https://wegmisbruikspotter.000webhostapp.com/m_spotnu.php?kenteken=ABC&ergernis=Bumperkleven&merk=Audi&description=test1&latitude=52.333290&longitude=6.084533&facebookID=123
+
                 URL url = new URL(link);
                 URLConnection conn = url.openConnection();
 
@@ -121,6 +123,7 @@ public class NewSpotActivity extends AsyncTask<String,String,String> {
                 //return "Error";
             }
         }
+        return null;
     }
 
     @Override
