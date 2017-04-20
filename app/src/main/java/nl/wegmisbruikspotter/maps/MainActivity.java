@@ -7,11 +7,13 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.util.Base64;
 import android.util.Log;
@@ -41,6 +43,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.security.MessageDigest;
@@ -57,9 +60,10 @@ public class MainActivity extends AppCompatActivity
     //Button btpic, btnup;
     private Uri fileUri;
     String picturePath;
-    //Uri selectedImage;
+    Uri selectedImage;
     Bitmap photo;
-    String ba;
+    String ba1;
+
 
     String kenteken;
     String ergernis;
@@ -307,16 +311,30 @@ public class MainActivity extends AppCompatActivity
             }
             try {
                 //Set selected image...
+                selectedImage = data.getData();
+                //photo = (Bitmap) data.getExtras().get("data");
+
+                // Cursor to get image uri to display
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                Cursor cursor = this.getContentResolver().query(selectedImage,
+                                        filePathColumn, null, null, null);
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                picturePath = cursor.getString(columnIndex);
+                cursor.close();
+                Log.e("path", "----------------" + picturePath);
+
                 InputStream inputStream = context.getContentResolver().openInputStream(data.getData());
                 Bitmap newProfilePic = BitmapFactory.decodeStream(inputStream);
                 ImageView foto_image = (ImageView) findViewById(R.id.foto);
                 foto_image.setImageBitmap(newProfilePic);
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
     }
-
 
     public void Spot(View view) {
 
@@ -369,6 +387,9 @@ public class MainActivity extends AppCompatActivity
             toast.show();
 
         }else {
+
+            //upload image
+            upload();
             //Place final Spot on website.
             String latitude = ((Globals) this.getApplication()).getlatitude();
             String longitude = ((Globals) this.getApplication()).getlongitude();
@@ -396,14 +417,16 @@ public class MainActivity extends AppCompatActivity
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 90, bao);
         byte[] ba = bao.toByteArray();
-        //ba1 = Base64.encodeBytes(ba);
+        ba1 = Base64.encodeToString(ba, Base64.NO_WRAP);
 
-        Log.e("base64", "-----" + ba);
+        Log.e("base64", "-----" + ba1);
 
         // Upload image to server
         new uploadToServer().execute();
 
     }
+
+
 
     public class uploadToServer extends AsyncTask<Void, Void, String> {
 
@@ -418,7 +441,7 @@ public class MainActivity extends AppCompatActivity
         protected String doInBackground(Void... params) {
 
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("base64", ba));
+            nameValuePairs.add(new BasicNameValuePair("base64", ba1));
             nameValuePairs.add(new BasicNameValuePair("ImageName", System.currentTimeMillis() + ".jpg"));
 
             //List<Pair<String, String>> params1 = new ArrayList<>();
