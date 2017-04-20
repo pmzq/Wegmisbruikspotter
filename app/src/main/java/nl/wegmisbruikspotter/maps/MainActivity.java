@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
     Double lat;
     Double lng;
     Context context = this;
-
+    public static String URL = "https://wegmisbruikspotter.000webhostapp.com/upload_image.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -417,18 +417,18 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected String doInBackground(Void... params) {
 
-            //ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            //nameValuePairs.add(new BasicNameValuePair("base64", ba));
-            //nameValuePairs.add(new BasicNameValuePair("ImageName", System.currentTimeMillis() + ".jpg"));
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("base64", ba));
+            nameValuePairs.add(new BasicNameValuePair("ImageName", System.currentTimeMillis() + ".jpg"));
 
-            List<Pair<String, String>> params1 = new ArrayList<>();
-            params1.add(new Pair<>("base64", ba));
-            params1.add(new Pair<>("ImageName", System.currentTimeMillis() + ".jpg"));
+            //List<Pair<String, String>> params1 = new ArrayList<>();
+            //params1.add(new Pair<>("base64", ba));
+            //params1.add(new Pair<>("ImageName", System.currentTimeMillis() + ".jpg"));
 
             try {
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost httppost = new HttpPost(URL);
-                httppost.setEntity(new UrlEncodedFormEntity(params1));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 HttpResponse response = httpclient.execute(httppost);
                 String st = EntityUtils.toString(response.getEntity());
                 Log.v("log_tag", "In the try Loop" + st);
