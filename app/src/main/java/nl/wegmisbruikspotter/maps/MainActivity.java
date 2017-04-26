@@ -1,5 +1,8 @@
 package nl.wegmisbruikspotter.maps;
 
+import android.*;
+import android.Manifest;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -12,9 +15,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.provider.SyncStateContract;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.CursorLoader;
 import android.util.Base64;
 import android.util.Log;
 import android.util.Pair;
@@ -278,6 +287,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private static final int PICK_PHOTO_FOR_AVATAR = 0;
+    public int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
     //Used for adding an image
     public void pickImage(View View) {
 
@@ -292,11 +302,18 @@ public class MainActivity extends AppCompatActivity
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         } else {
+            //Request permission to access library
+            ActivityCompat.requestPermissions(this,
+            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+            //Start the file selection intent
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("image/*");
             startActivityForResult(intent, PICK_PHOTO_FOR_AVATAR);
+
         }
     }
+
 
     //Function to get the result of the specified requestCode
     //0 = Retreive image and add it to foto imageView
@@ -310,31 +327,72 @@ public class MainActivity extends AppCompatActivity
                 return;
             }
             try {
-                //Set selected image...
                 selectedImage = data.getData();
-                //photo = (Bitmap) data.getExtras().get("data");
 
-                // Cursor to get image uri to display
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                Cursor cursor = this.getContentResolver().query(selectedImage,
-                                        filePathColumn, null, null, null);
-                cursor.moveToFirst();
+                //Based on SDK version determine which way the URL can be retreived of the selected image.
+                if (Build.VERSION.SDK_INT < 19) {
+                    picturePath = getRealPathFromURI_API11to18(this, data.getData());
+                    //Log.e("path", "----------------" + picturePath);
+                    // SDK > 19 (Android 4.4)
+                } else {
+                    picturePath = getRealPathFromURI_API19(this, data.getData());
+                    //Log.e("path", "----------------" + picturePath);
+                }
 
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                picturePath = cursor.getString(columnIndex);
-                cursor.close();
-                Log.e("path", "----------------" + picturePath);
-
+                //Add selected image to imageview.
                 InputStream inputStream = context.getContentResolver().openInputStream(data.getData());
                 Bitmap newProfilePic = BitmapFactory.decodeStream(inputStream);
                 ImageView foto_image = (ImageView) findViewById(R.id.foto);
                 foto_image.setImageBitmap(newProfilePic);
 
             } catch (FileNotFoundException e) {
+
                 e.printStackTrace();
             }
         }
     }
+
+
+    public static String getRealPathFromURI_API19(Context context,Uri uri) {
+        String filePath="";
+        String wholeID=DocumentsContract.getDocumentId(uri);
+
+        //Splitatcolon,useseconditeminthearray
+        String id=wholeID.split(":")[1];
+
+        String[]column={MediaStore.Images.Media.DATA};
+
+        //whereidisequalto            
+        String sel=MediaStore.Images.Media._ID+"=?";
+
+        Cursor cursor=context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        column,sel,new String[]{id},null);
+
+        int columnIndex=cursor.getColumnIndex(column[0]);
+
+        if(cursor.moveToFirst()) {
+        filePath = cursor.getString(columnIndex);
+                }
+        cursor.close();
+        return filePath;
+}
+
+    public static String getRealPathFromURI_API11to18(Context context, Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        String result = null;
+
+        CursorLoader cursorLoader = new CursorLoader(
+        context,contentUri, proj, null, null, null);
+        Cursor cursor = cursorLoader.loadInBackground();
+
+        if(cursor != null){
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            result = cursor.getString(column_index);
+        }
+    return result;
+}
+
 
     public void Spot(View view) {
 
