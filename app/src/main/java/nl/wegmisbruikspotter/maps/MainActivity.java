@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
     String picturePath;
     Uri selectedImage;
     Bitmap photo;
-    String ba1;
+    String File_path;
 
 
     String kenteken;
@@ -336,14 +336,27 @@ public class MainActivity extends AppCompatActivity
                     // SDK > 19 (Android 4.4)
                 } else {
                     picturePath = getRealPathFromURI_API19(this, data.getData());
-                    //Log.e("path", "----------------" + picturePath);
+                    Log.e("path", "----------------" + picturePath);
                 }
+
+                File f = new File("" + picturePath);
+
+                Log.e("path", "----------------" + f.getName());
+                String File_name;
+                File_name = f.getName();
 
                 //Add selected image to imageview.
                 InputStream inputStream = context.getContentResolver().openInputStream(data.getData());
                 Bitmap newProfilePic = BitmapFactory.decodeStream(inputStream);
                 ImageView foto_image = (ImageView) findViewById(R.id.foto);
                 foto_image.setImageBitmap(newProfilePic);
+
+                Bitmap bm = BitmapFactory.decodeFile(picturePath);
+                ByteArrayOutputStream bao = new ByteArrayOutputStream();
+                bm.compress(Bitmap.CompressFormat.JPEG, 90, bao);
+                byte[] ba = bao.toByteArray();
+                //ba1 = Base64.encodeBytes(ba);
+                File_path = Base64.encodeToString(ba, Base64.DEFAULT);
 
             } catch (FileNotFoundException e) {
 
@@ -447,7 +460,7 @@ public class MainActivity extends AppCompatActivity
         }else {
 
             //upload image
-            upload();
+            new uploadToServer().execute();
             //Place final Spot on website.
             String latitude = ((Globals) this.getApplication()).getlatitude();
             String longitude = ((Globals) this.getApplication()).getlongitude();
@@ -465,7 +478,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
-
+/*
     private void upload() {
         // Image location URL
         Log.e("path", "----------------" + picturePath);
@@ -475,15 +488,15 @@ public class MainActivity extends AppCompatActivity
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 90, bao);
         byte[] ba = bao.toByteArray();
-        ba1 = Base64.encodeToString(ba, Base64.NO_WRAP);
+        //ba1 = Base64.encodeToString(ba, Base64.NO_WRAP);
 
-        Log.e("base64", "-----" + ba1);
+        Log.e("base64", "-----" + File_path);
 
         // Upload image to server
         new uploadToServer().execute();
 
     }
-
+*/
 
 
     public class uploadToServer extends AsyncTask<Void, Void, String> {
@@ -499,7 +512,7 @@ public class MainActivity extends AppCompatActivity
         protected String doInBackground(Void... params) {
 
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("base64", ba1));
+            nameValuePairs.add(new BasicNameValuePair("base64", File_path));
             nameValuePairs.add(new BasicNameValuePair("ImageName", System.currentTimeMillis() + ".jpg"));
 
             //List<Pair<String, String>> params1 = new ArrayList<>();
