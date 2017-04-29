@@ -1,9 +1,6 @@
 package nl.wegmisbruikspotter.maps;
 
-import android.*;
 import android.Manifest;
-import android.app.Activity;
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,14 +16,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.provider.SyncStateContract;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.util.Base64;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -58,9 +51,6 @@ import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.List;
-
-import static android.R.attr.fragment;
 
 
 public class MainActivity extends AppCompatActivity
@@ -83,6 +73,7 @@ public class MainActivity extends AppCompatActivity
     String longitude;
     Double lat;
     Double lng;
+    String File_name;
     Context context = this;
     public static String URL = "https://wegmisbruikspotter.000webhostapp.com/upload_image.php";
 
@@ -92,26 +83,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        //String facebookName = ((Globals) this.getApplication()).getfacebookName();
-
-        //Context context = getApplicationContext();
-        //int duration = Toast.LENGTH_SHORT;
-
-        //Toast toast = Toast.makeText(context, facebookName, duration);
-        //toast.show();
-
-        //EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
-        //kenteken_text.requestFocus();
-
-        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        }); */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -162,6 +133,8 @@ public class MainActivity extends AppCompatActivity
         EditText description_text = (EditText) findViewById(R.id.txtDescription);
         description_text.setText(description);
         printKeyHash();
+
+        //String facebookName = ((Globals) this.getApplication()).getfacebookName();
 
     }
 
@@ -341,9 +314,9 @@ public class MainActivity extends AppCompatActivity
 
                 File f = new File("" + picturePath);
 
-                Log.e("path", "----------------" + f.getName());
-                String File_name;
-                File_name = f.getName();
+                //Log.e("path", "----------------" + f.getName());
+                //String File_name;
+                //File_name = f.getName();
 
                 //Add selected image to imageview.
                 InputStream inputStream = context.getContentResolver().openInputStream(data.getData());
@@ -459,13 +432,16 @@ public class MainActivity extends AppCompatActivity
 
         }else {
 
-            //upload image
-            new uploadToServer().execute();
+
             //Place final Spot on website.
             String latitude = ((Globals) this.getApplication()).getlatitude();
             String longitude = ((Globals) this.getApplication()).getlongitude();
             String facebookID = ((Globals) this.getApplication()).getfacebookID();
-            new NewSpotActivity(this, 1).execute(kenteken, ergernis, merk, description, latitude, longitude,facebookID);
+            String facebookName = ((Globals) this.getApplication()).getfacebookID();
+            new NewSpotActivity(this, 1).execute(kenteken, ergernis, merk, description, latitude, longitude,facebookID,facebookName, File_name);
+
+            //upload image
+            new uploadToServer().execute();
         }
     }
 
@@ -511,9 +487,13 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected String doInBackground(Void... params) {
 
+            Long Time;
+            Time = System.currentTimeMillis();
+            File_name = Time.toString();
+
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("base64", File_path));
-            nameValuePairs.add(new BasicNameValuePair("ImageName", System.currentTimeMillis() + ".jpg"));
+            nameValuePairs.add(new BasicNameValuePair("ImageName", File_name + ".jpg"));
 
             //List<Pair<String, String>> params1 = new ArrayList<>();
             //params1.add(new Pair<>("base64", ba));

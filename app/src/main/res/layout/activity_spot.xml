@@ -20,14 +20,23 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@color/colorAccent"
-                android:layout_alignTop="@+id/textAutoMerk"
-                android:layout_toRightOf="@+id/textAutoMerk"
-                android:layout_marginLeft="26dp"
-                android:layout_marginStart="26dp"
-                android:id="@+id/img_merk" />
+                android:id="@+id/img_photo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignTop="@+id/img_merk"
+                android:layout_toEndOf="@+id/foto"
+                android:layout_toRightOf="@+id/foto"
+                app:srcCompat="@color/colorAccent" />
+
+            <ImageView
+                android:id="@+id/img_merk"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/kenteken"
+                android:layout_margin="10dp"
+                app:srcCompat="@color/colorAccent" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -47,25 +56,10 @@
                 android:text="Ergernis:"
                 android:textSize="18sp"
                 tools:textStyle="bold"
-                android:layout_below="@+id/kenteken"
-                android:layout_alignLeft="@+id/foto"
-                android:layout_alignStart="@+id/foto"
-                android:layout_marginTop="23dp" />
-
-            <EditText
-                android:id="@+id/txtDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:background="@drawable/bubble1"
-                android:ems="10"
-                android:focusable="false"
-                android:inputType="none|textMultiLine"
-                android:isScrollContainer="false"
-                android:scrollHorizontally="false"
-                android:layout_below="@+id/txtErgernis"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_below="@+id/img_photo"
+                android:layout_toRightOf="@+id/foto"
+                android:layout_toEndOf="@+id/foto"
+                android:layout_marginTop="13dp" />
 
             <TextView
                 android:id="@+id/txtErgernis"
@@ -73,8 +67,7 @@
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 tools:textSize="14sp"
-                android:layout_marginTop="34dp"
-                android:layout_alignTop="@+id/textErgernis"
+                android:layout_below="@+id/textErgernis"
                 android:layout_toRightOf="@+id/foto"
                 android:layout_toEndOf="@+id/foto" />
 
@@ -92,9 +85,48 @@
                 tools:layout_editor_absoluteY="129dp"
                 tools:layout_editor_absoluteX="8dp"
                 android:focusable="false"
-                android:layout_alignTop="@+id/foto"
+                android:layout_marginTop="32dp"
+                android:layout_below="@+id/foto"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
+
+            <EditText
+                android:id="@+id/txtDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/txtErgernis"
+                android:layout_marginTop="11dp"
+                android:background="@drawable/bubble1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/editText"
+                android:layout_marginEnd="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="11dp"
+                android:clickable="true"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/send" />
 
         </RelativeLayout>
     </ScrollView>

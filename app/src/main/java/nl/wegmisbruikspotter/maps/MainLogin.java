@@ -50,39 +50,16 @@ public class MainLogin extends Activity {
         info = (TextView)findViewById(R.id.info);
         //loginButton = (LoginButton)findViewById(R.id.login_button);
 
-
-        //LoginManager.getInstance().logOut();
-        //sleep(1000);
-
-        /*FacebookSdk.sdkInitialize(getApplicationContext(), new FacebookSdk.InitializeCallback() {
-            @Override
-            public void onInitialized() {
-                if(AccessToken.getCurrentAccessToken() == null){
-                    System.out.println("not logged in yet");
-                } else {
-                    System.out.println("Logged in");
-                }
-            }
-        });*/
-
-        /*test = AccessToken.getCurrentAccessToken();
-
-        if (test != null) {
-            Log.v(TAG, "YES");
-        }   else {
-            Log.v(TAG, "NO!");
-        }
-*/
         Profile profile = Profile.getCurrentProfile();
         if (profile != null) {
-            Log.v(TAG, "Logged, user name=" + profile.getFirstName() + " " + profile.getLastName());
+            //Log.v(TAG, "Logged, user name=" + profile.getFirstName() + " " + profile.getLastName());
             String facebookID = getCurrentAccessToken().getUserId();
             ((Globals) getApplication()).setfacebookName(profile.getFirstName());
             ((Globals) getApplication()).setfacebookID(facebookID);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {
-            Log.v(TAG, "Logged, user name=");
+            //Log.v(TAG, "Logged, user name=");
         }
 
         /*LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
@@ -97,7 +74,7 @@ public class MainLogin extends Activity {
                         @Override
                         protected void onCurrentProfileChanged(Profile profile, Profile profile2) {
                             // profile2 is the new profile
-                            Log.v("facebook - profile", profile2.getFirstName());
+                            //Log.v("facebook - profile", profile2.getFirstName());
                             Intent intent = new Intent(MainLogin.this, MainActivity.class);
                             String facebookID = getCurrentAccessToken().getUserId();
                             ((Globals) getApplication()).setfacebookID(facebookID);
@@ -112,8 +89,8 @@ public class MainLogin extends Activity {
                 }
                 else {
                     Profile profile = Profile.getCurrentProfile();
-                    Log.v("facebook - profile", profile.getFirstName());
-                    Log.v(TAG, "Logged, user name=" + profile.getFirstName());
+                    //Log.v("facebook - profile", profile.getFirstName());
+                    //Log.v(TAG, "Logged, user name=" + profile.getFirstName());
                     String facebookID = getCurrentAccessToken().getUserId();
                     ((Globals) getApplication()).setfacebookID(facebookID);
                     ((Globals) getApplication()).setfacebookName(profile.getFirstName());

@@ -15,6 +15,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class NewSpotActivity extends AsyncTask<String,String,String> {
 
     @Override
     protected String doInBackground(String... arg0) {
+        Log.e("path", "----------------START SPOT");
         if (byGetOrPost == 0) { //means by Get Method
 
             try {
@@ -69,6 +71,7 @@ public class NewSpotActivity extends AsyncTask<String,String,String> {
                 return new String("Exception: " + e.getMessage());
             }
         } else {
+            Log.e("path", "----------------START SPOT2");
             try {
                 String kenteken = (String) arg0[0];
                 String ergernis = (String) arg0[1];
@@ -77,8 +80,8 @@ public class NewSpotActivity extends AsyncTask<String,String,String> {
                 String lat = (String) arg0[4];
                 String lng = (String) arg0[5];
                 String facebookID = (String) arg0[6];
-                String filename = (String) arg0[7];
-                String Base64 = (String) arg0[8];
+                String facebookName = (String) arg0[7];
+                String File_name = (String) arg0[8];
 
                 String link = "https://wegmisbruikspotter.000webhostapp.com/m_spotnu.php";
                 //String link = "http://wegmisbruikspotter.ezyro.com/m_spotnu.php";
@@ -96,8 +99,10 @@ public class NewSpotActivity extends AsyncTask<String,String,String> {
                         URLEncoder.encode(lng, "UTF-8");
                 data += "&" + URLEncoder.encode("facebookID", "UTF-8") + "=" +
                         URLEncoder.encode(facebookID, "UTF-8");
+                data += "&" + URLEncoder.encode("facebookName", "UTF-8") + "=" +
+                        URLEncoder.encode(facebookName, "UTF-8");
                 data += "&" + URLEncoder.encode("filename", "UTF-8") + "=" +
-                        URLEncoder.encode(filename, "UTF-8");
+                        URLEncoder.encode(File_name, "UTF-8");
 
                 //https://wegmisbruikspotter.000webhostapp.com/m_spotnu.php?kenteken=ABC&ergernis=Bumperkleven&merk=Audi&description=test1&latitude=52.333290&longitude=6.084533&facebookID=123
 

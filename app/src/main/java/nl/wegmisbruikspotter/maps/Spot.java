@@ -3,10 +3,12 @@ package nl.wegmisbruikspotter.maps;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,23 +16,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -40,12 +39,15 @@ public class Spot extends AppCompatActivity implements NavigationView.OnNavigati
     private static final String JSON_URL = "https://wegmisbruikspotter.000webhostapp.com/m_retreivesinglespot.php";
 
     String kenteken;
+    Bitmap b;
+    ImageView img;
     String ergenis;
     String merk;
     String description;
     String lat;
     String lng;
     //String Spot_id = ((Globals) this.getApplication()).getspotid();
+    String Image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,16 @@ public class Spot extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView.setNavigationItemSelectedListener(this);
 
         getJSON(JSON_URL);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -171,17 +183,15 @@ public class Spot extends AppCompatActivity implements NavigationView.OnNavigati
                         String ergernis = e.getString("ergernis");
                         String description = e.getString("description");
                         String merk_main = e.getString("merk");
+                        Image = e.getString("Image");
 
+                        //Set photo image when available
+                        if (Image != "") {
+                            img = (ImageView) findViewById(R.id.img_photo);
+                            information info = new information();
+                            info.execute(Image);
+                        }
 
-                        //String id = e.getString("id");
-
-                        //String[] point2 = point.split(",");
-                        //double lat1 = Double.parseDouble(latitude);
-                        //double lng1 = Double.parseDouble(longitude);
-
-                        //Marker melbourne =
-                        //Marker melbourne = mMap.addMarker(new MarkerOptions().title(e.getString("id")).position(new LatLng(lat1, lng1)).snippet(getResources().getString(R.string.Meer_info)));
-                        //melbourne.showInfoWindow();
 
                         EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
                         kenteken_text.setText(kenteken);
@@ -193,18 +203,18 @@ public class Spot extends AppCompatActivity implements NavigationView.OnNavigati
                         description_text.setText(description);
 
                         //Set merk image
-                        //String merk_low = merk_main.toLowerCase();
-                        //String merk = merk_low.replaceAll("\\s+","");
-                        //int merk_imageID = getResources().getIdentifier(merk, "drawable" , getPackageName());
-                        //ImageView imageView = (ImageView) findViewById(R.id.imgMerk);
-                        //String test = "R.drawable." + merk;
-                        //imageView.setImageResource(merk_imageID);
+                        String merk_low = merk_main.toLowerCase();
+                        String merk = merk_low.replaceAll("\\s+","");
+                        int merk_imageID = getResources().getIdentifier(merk, "drawable" , getPackageName());
+                        ImageView imageView = (ImageView) findViewById(R.id.img_merk);
+                        String test = "R.drawable." + merk;
+                        imageView.setImageResource(merk_imageID);
 
-                        Context context1 = getApplicationContext();
-                        int duration1 = Toast.LENGTH_SHORT;
+                        //Context context1 = getApplicationContext();
+                        //int duration1 = Toast.LENGTH_SHORT;
 
-                        Toast toast1 = Toast.makeText(context1, ergernis, duration1);
-                        toast1.show();
+                        //Toast toast1 = Toast.makeText(context1, ergernis, duration1);
+                        //toast1.show();
                         //Toast toast2 = Toast.makeText(context1, id, duration1);
                         //toast2.show();
                     }
@@ -216,5 +226,29 @@ public class Spot extends AppCompatActivity implements NavigationView.OnNavigati
         }
         GetJSON gj = new GetJSON();
         gj.execute(url);
+
+
+    }
+
+    public class information extends AsyncTask<String, String, String>
+    {
+        @Override
+        protected String doInBackground(String... arg0) {
+
+            String test = (String) arg0[0];
+            try
+            {
+                URL url = new URL("https://wegmisbruikspotter.000webhostapp.com/Images/"+test+".jpg");
+                InputStream is = new BufferedInputStream(url.openStream());
+                b = BitmapFactory.decodeStream(is);
+
+            } catch(Exception e){}
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            img.setImageBitmap(b);
+        }
     }
 }
