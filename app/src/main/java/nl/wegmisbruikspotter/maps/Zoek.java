@@ -2,8 +2,11 @@ package nl.wegmisbruikspotter.maps;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -169,33 +173,68 @@ public class Zoek extends AppCompatActivity {
                         Log.v("Test1","array gezet");
                         loading.dismiss();
 
-                        // create a new textview
-                        //final TextView rowTextView = new TextView(mContext);
 
+                        //Create layout to hold single spot
+                        final LinearLayout Layout = new LinearLayout(mContext);
+
+                        //Set layout properties
                         LinearLayout.LayoutParams lprams = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT);
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        //Set margins
+                        lprams.setMargins(16, 16, 16, 0);
+                        //Change background
+                        Layout.setBackgroundResource(android.R.drawable.dialog_holo_light_frame);
 
-                        Button btn = new Button(mContext);
-                        btn.setId(i+1);
-                        btn.setText("Button"+(i+1));
-                        btn.setLayoutParams(lprams);
 
+                        //Make layout horizontal
+                        Layout.setOrientation(LinearLayout.VERTICAL);
+
+                        //Apply defined parameters to layout
+                        Layout.setLayoutParams(lprams);
+
+                        //Set layout properties
+                        LinearLayout.LayoutParams tprams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT
+                        );
+
+                        // create two new textviews for Date and ergernis
+                        final TextView TextViewDate = new TextView(mContext);
+                        final TextView TextViewErgernis = new TextView(mContext);
+
+                        //Make variable final
                         final int index = i;
 
-                        btn.setOnClickListener(new View.OnClickListener() {
+                        //Set onclick listener for layout
+                        Layout.setOnClickListener(new View.OnClickListener() {
                             public void onClick(View v) {
-                                Log.i("TAG", "The index is" + index);
+                                Log.i("TAG", "The index is " + index);
                             }
                         });
 
-                        // set some properties of rowTextView or something
-                        //rowTextView.setText("This is row #" + i);
+                        // set properties of Date TextView
+                        TextViewDate.setText(date);
+                        TextViewDate.setTextSize(18);
+                        TextViewDate.setTypeface(null, Typeface.BOLD);
+                        TextViewDate.setPadding(10,10,0,0);
+                        TextViewDate.setLayoutParams(tprams);
+
+                        // set properties of Ergernis TextView
+                        TextViewErgernis.setText(ergernis);
+                        //TextViewErgernis.setTextSize(18);
+                        //TextViewErgernis.setTypeface(null, Typeface.BOLD);
+                        TextViewErgernis.setPadding(10,10,0,10);
+                        TextViewErgernis.setLayoutParams(tprams);
 
                         LinearLayout l = (LinearLayout) findViewById(R.id.linearlayout);
 
                         // add the textview to the linearlayout
-                        l.addView(btn);
+                        l.addView(Layout);
+                        Layout.addView(TextViewDate);
+                        Layout.addView(TextViewErgernis);
+
                     }
 
                 } catch (JSONException e) {

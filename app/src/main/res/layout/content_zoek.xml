@@ -59,7 +59,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/btnZoek"
-            android:orientation="horizontal"></LinearLayout>
+            android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/dialog_holo_light_frame"
+                    android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="27-Mar-2017"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/ergernis"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Asbak legen op straatAsbak legen op straatAsbak legen op straatAsbak legen op straat" />
+                </LinearLayout>
+        </LinearLayout>
 
 </RelativeLayout>
 
