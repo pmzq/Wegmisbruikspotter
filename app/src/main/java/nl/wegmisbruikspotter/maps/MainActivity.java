@@ -216,6 +216,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_slideshow) {
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context ,Zoek.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_manage) {
 

@@ -2,6 +2,8 @@ package nl.wegmisbruikspotter.maps;
 
 import android.app.Application;
 
+import java.util.List;
+
 /**
  * Created by pmzq_ on 24-1-2017.
  */
@@ -18,6 +20,7 @@ public class Globals extends Application {
     private String spotid;
     private String facebookName;
     private String facebookID;
+    private List<List<String>> twoDim;
 
     public String getkenteken() {
         return kenteken;
@@ -80,5 +83,12 @@ public class Globals extends Application {
     }
     public void setfacebookID(String facebookID) {
         this.facebookID = facebookID;
+    }
+
+    public List<List<String>> gettwoDim() {
+        return twoDim;
+    }
+    public void setkenteken(List<List<String>> twoDim) {
+        this.twoDim = twoDim;
     }
 }

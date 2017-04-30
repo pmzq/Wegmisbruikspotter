@@ -209,14 +209,7 @@ public class Spot extends AppCompatActivity implements NavigationView.OnNavigati
                         ImageView imageView = (ImageView) findViewById(R.id.img_merk);
                         String test = "R.drawable." + merk;
                         imageView.setImageResource(merk_imageID);
-
-                        //Context context1 = getApplicationContext();
-                        //int duration1 = Toast.LENGTH_SHORT;
-
-                        //Toast toast1 = Toast.makeText(context1, ergernis, duration1);
-                        //toast1.show();
-                        //Toast toast2 = Toast.makeText(context1, id, duration1);
-                        //toast2.show();
+                        
                     }
 
                 } catch (JSONException e) {

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_spot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nl.wegmisbruikspotter.maps.Spot">
+
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="60dp"
+            android:text="Benieuwd of jij al eens bent gespot?"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/kenteken"
+            android:layout_width="match_parent"
+            android:layout_height="74dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/Title"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/kentekenplaat"
+            android:cursorVisible="true"
+            android:ems="10"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="Kenteken"
+            android:inputType="textCapCharacters"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="@dimen/font_size"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <Button
+            android:id="@+id/btnZoek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kenteken"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp"
+            android:backgroundTint="?android:attr/colorPressedHighlight"
+            android:onClick="Zoek"
+            android:text="Zoek kenteken!"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:id="@+id/linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/btnZoek"
+            android:orientation="horizontal"></LinearLayout>
+
+</RelativeLayout>
+
+
