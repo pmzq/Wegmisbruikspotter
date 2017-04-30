@@ -2,14 +2,22 @@ package nl.wegmisbruikspotter.maps;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,7 +48,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-public class Zoek extends AppCompatActivity {
+public class Zoek extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String MY_JSON ="MY_JSON";
     private static final String JSON_URL = "https://wegmisbruikspotter.000webhostapp.com/m_zoek.php";
@@ -52,6 +60,95 @@ public class Zoek extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zoek);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        //switch (item.getItemId()) {
+        //   case R.id.action_settings:
+        //       Context context = getApplicationContext();
+        //       Intent intent = new Intent(context ,AllSpots.class);
+        //      startActivity(intent);
+        //return true;
+        //        default:
+        //        return super.onOptionsItemSelected(item);
+        //  }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.AllSpots) {
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context ,AllSpots.class);
+            startActivity(intent);
+            //return true;
+
+        } else if (id == R.id.SpotNu) {
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context ,MainActivity.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_slideshow) {
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context ,Zoek.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     //Run when Zoek is pressed.
@@ -143,6 +240,9 @@ public class Zoek extends AppCompatActivity {
 
                     for (int i = 0; i < json.length()-1; i++) {
 
+                        //Make variable final
+                        final int index = i;
+
                         JSONObject e = json.getJSONObject(i);
                         String id = e.getString("id");
                         String date = e.getString("datum");
@@ -186,6 +286,7 @@ public class Zoek extends AppCompatActivity {
                         lprams.setMargins(16, 16, 16, 0);
                         //Change background
                         Layout.setBackgroundResource(android.R.drawable.dialog_holo_light_frame);
+                        Layout.setClickable(true);
 
 
                         //Make layout horizontal
@@ -193,6 +294,13 @@ public class Zoek extends AppCompatActivity {
 
                         //Apply defined parameters to layout
                         Layout.setLayoutParams(lprams);
+
+                        //Set onclick listener for layout
+                        Layout.setOnClickListener(new View.OnClickListener() {
+                            public void onClick(View v) {
+                                Log.v("TAG", "The index is " + index);
+                            }
+                        });
 
                         //Set layout properties
                         LinearLayout.LayoutParams tprams = new LinearLayout.LayoutParams(
@@ -204,15 +312,7 @@ public class Zoek extends AppCompatActivity {
                         final TextView TextViewDate = new TextView(mContext);
                         final TextView TextViewErgernis = new TextView(mContext);
 
-                        //Make variable final
-                        final int index = i;
 
-                        //Set onclick listener for layout
-                        Layout.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v) {
-                                Log.i("TAG", "The index is " + index);
-                            }
-                        });
 
                         // set properties of Date TextView
                         TextViewDate.setText(date);
@@ -228,12 +328,14 @@ public class Zoek extends AppCompatActivity {
                         TextViewErgernis.setPadding(10,10,0,10);
                         TextViewErgernis.setLayoutParams(tprams);
 
+
                         LinearLayout l = (LinearLayout) findViewById(R.id.linearlayout);
 
                         // add the textview to the linearlayout
                         l.addView(Layout);
                         Layout.addView(TextViewDate);
                         Layout.addView(TextViewErgernis);
+
 
                     }
 
