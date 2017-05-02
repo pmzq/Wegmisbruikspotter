@@ -84,6 +84,7 @@
 
         <!-- <activity android:name=".MainLogin"></activity> -->
 
+        <activity android:name=".MijnSpots"></activity>
     </application>
 
 </manifest>

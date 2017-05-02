@@ -82,9 +82,9 @@ public class AllSpots extends AppCompatActivity implements OnMapReadyCallback, N
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.AllSpots) {
+        if (id == R.id.zoeken) {
             Context context = getApplicationContext();
-            Intent intent = new Intent(context ,AllSpots.class);
+            Intent intent = new Intent(context ,Zoek.class);
             startActivity(intent);
             //return true;
 
@@ -93,13 +93,15 @@ public class AllSpots extends AppCompatActivity implements OnMapReadyCallback, N
             Intent intent = new Intent(context ,MainActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.AllSpots) {
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context ,AllSpots.class);
+            startActivity(intent);
+            //return true;
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.MijnSpots) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.Rankings) {
 
         }
 
