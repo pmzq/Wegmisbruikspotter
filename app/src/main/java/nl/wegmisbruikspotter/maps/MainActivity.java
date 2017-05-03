@@ -222,6 +222,10 @@ public class MainActivity extends AppCompatActivity
             //return true;
 
         } else if (id == R.id.MijnSpots) {
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context ,MijnSpots.class);
+            startActivity(intent);
+            //return true;
 
         } else if (id == R.id.Rankings) {
 

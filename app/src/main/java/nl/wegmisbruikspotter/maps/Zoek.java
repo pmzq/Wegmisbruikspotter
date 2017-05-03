@@ -140,6 +140,10 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
             //return true;
 
         } else if (id == R.id.MijnSpots) {
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context ,MijnSpots.class);
+            startActivity(intent);
+            //return true;
 
         } else if (id == R.id.Rankings) {
 
@@ -247,6 +251,7 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
                         String date = e.getString("datum");
                         String ergernis = e.getString("ergernis");
 
+                        /*
                         String[] inputLines = { id,date,ergernis };
 
                         for (String line : inputLines) {
@@ -270,6 +275,7 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
 
                         }
                         Log.v("Test1","array gezet");
+                        */
                         loading.dismiss();
 
 

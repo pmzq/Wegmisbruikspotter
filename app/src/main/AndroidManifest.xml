@@ -84,7 +84,10 @@
 
         <!-- <activity android:name=".MainLogin"></activity> -->
 
-        <activity android:name=".MijnSpots"></activity>
+        <activity android:name=".MijnSpots"
+            android:label="MijnSpots"
+        android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>

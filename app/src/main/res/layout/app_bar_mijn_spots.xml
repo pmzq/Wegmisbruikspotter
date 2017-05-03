@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="nl.wegmisbruikspotter.maps.MainActivity">
 
-    <include layout="@layout/content_zoek"
+    <include layout="@layout/content_mijn_spots"
         android:layout_height="match_parent"
         android:layout_width="match_parent" />
 
