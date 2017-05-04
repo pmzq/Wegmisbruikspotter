@@ -230,7 +230,7 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                         //Set margins
                         lprams.setMargins(16, 16, 16, 0);
                         //Change background
-                        Layout.setBackgroundResource(android.R.drawable.dialog_holo_light_frame);
+                        Layout.setBackgroundResource(R.drawable.bottom_border);
                         Layout.setClickable(true);
 
                         //Make layout vertical
