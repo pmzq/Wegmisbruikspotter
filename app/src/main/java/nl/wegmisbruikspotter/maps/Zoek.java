@@ -251,6 +251,7 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
                         String date = e.getString("datum");
                         String ergernis = e.getString("ergernis");
 
+                        Log.e("test","------------" + date);
                         /*
                         String[] inputLines = { id,date,ergernis };
 

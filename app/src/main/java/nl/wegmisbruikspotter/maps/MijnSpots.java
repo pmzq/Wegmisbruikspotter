@@ -12,7 +12,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +33,8 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+
+import static nl.wegmisbruikspotter.maps.R.dimen.font_size;
 
 public class MijnSpots extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -149,14 +153,14 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loading = ProgressDialog.show(Spot.this, "Please Wait...",null,true,true);
+                loading = ProgressDialog.show(MijnSpots.this, "Please Wait...",null,true,true);
             }
 
             @Override
             protected String doInBackground(String... params) {
 
                 String uri = params[0];
-                String spotid = ((Globals) getApplication()).getspotid();
+                String facebookID = ((Globals) getApplication()).getfacebookID();
                 BufferedReader bufferedReader = null;
                 try {
                     //URL url = new URL(uri);
@@ -165,8 +169,8 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                     URLConnection con = url.openConnection();
                     StringBuilder sb = new StringBuilder();
 
-                    String data = URLEncoder.encode("id", "UTF-8") + "=" +
-                            URLEncoder.encode(spotid, "UTF-8");
+                    String data = URLEncoder.encode("facebookID", "UTF-8") + "=" +
+                            URLEncoder.encode(facebookID, "UTF-8");
 
                     con.setDoOutput(true);
                     OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
@@ -212,6 +216,9 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                         String merk_main = e.getString("merk");
                         String date = e.getString("datum");
 
+                        //Make variable final
+                        final int index = i;
+
                         //Create layout to hold single spot
                         final LinearLayout Layout = new LinearLayout(mContext);
 
@@ -226,12 +233,12 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                         Layout.setBackgroundResource(android.R.drawable.dialog_holo_light_frame);
                         Layout.setClickable(true);
 
-
-                        //Make layout horizontal
+                        //Make layout vertical
                         Layout.setOrientation(LinearLayout.VERTICAL);
 
                         //Apply defined parameters to layout
                         Layout.setLayoutParams(lprams);
+
 
                         //Set onclick listener for layout
                         Layout.setOnClickListener(new View.OnClickListener() {
@@ -246,17 +253,35 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                                 LinearLayout.LayoutParams.MATCH_PARENT
                         );
 
+                        //Set layout properties
+                        LinearLayout.LayoutParams kentekenprams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT
+                        );
+                        kentekenprams.height = 74;
+                        kentekenprams.width = 300;
+                        kentekenprams.setMargins(5,5,0,0);
+
                         // create two new textviews for Date and ergernis
                         final TextView TextViewDate = new TextView(mContext);
                         final TextView TextViewErgernis = new TextView(mContext);
+                        final TextView TextViewKenteken = new TextView(mContext);
 
 
                         // set properties of Date TextView
                         TextViewDate.setText(date);
-                        TextViewDate.setTextSize(18);
-                        TextViewDate.setTypeface(null, Typeface.BOLD);
+                        TextViewDate.setTextSize(12);
+                        //TextViewDate.setTypeface(null, Typeface.BOLD);
                         TextViewDate.setPadding(10, 10, 0, 0);
                         TextViewDate.setLayoutParams(tprams);
+
+                        //set properties of Kenteken TextView
+                        TextViewKenteken.setText(kenteken);
+                        TextViewKenteken.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+                        TextViewKenteken.setTypeface(null, Typeface.BOLD);
+                        //TextViewKenteken.setPadding(10, 10, 0, 0);
+                        TextViewKenteken.setLayoutParams(kentekenprams);
+                        TextViewKenteken.setBackgroundResource(R.drawable.kentekenplaat);
 
                         // set properties of Ergernis TextView
                         TextViewErgernis.setText(ergernis);
@@ -270,6 +295,7 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
 
                         // add the textview to the linearlayout
                         l.addView(Layout);
+                        Layout.addView(TextViewKenteken);
                         Layout.addView(TextViewDate);
                         Layout.addView(TextViewErgernis);
                     }

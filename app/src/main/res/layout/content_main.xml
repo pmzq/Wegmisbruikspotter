@@ -20,25 +20,25 @@
             android:layout_marginTop="16dp" />
 
         <EditText
-            android:layout_height="74dp"
-            android:inputType="textCapCharacters"
-            android:ems="10"
             android:id="@+id/kenteken"
             android:layout_width="match_parent"
-            android:textSize="@dimen/font_size"
-            android:textCursorDrawable="@drawable/color_cursor"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:background="@drawable/kentekenplaat"
-            android:layout_marginTop="16dp"
+            android:layout_height="74dp"
             android:layout_below="@+id/Title"
-            android:cursorVisible="true"
-            android:hint="Kenteken"
-            android:gravity="center_vertical|center_horizontal"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp" />
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/kentekenplaat"
+            android:cursorVisible="true"
+            android:ems="10"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="Kenteken"
+            android:inputType="textCapCharacters"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="@dimen/font_size"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
         <Spinner
             android:layout_width="match_parent"
