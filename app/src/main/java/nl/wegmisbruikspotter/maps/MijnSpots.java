@@ -3,6 +3,7 @@ package nl.wegmisbruikspotter.maps;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
@@ -260,6 +261,7 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                         );
                         kentekenprams.height = 74;
                         kentekenprams.width = 300;
+
                         kentekenprams.setMargins(5,5,0,0);
 
                         // create two new textviews for Date and ergernis
@@ -273,6 +275,7 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                         TextViewDate.setTextSize(12);
                         //TextViewDate.setTypeface(null, Typeface.BOLD);
                         TextViewDate.setPadding(10, 10, 0, 0);
+                        TextViewDate.setBackgroundColor(Color.parseColor("#FAFAFA"));
                         TextViewDate.setLayoutParams(tprams);
 
                         //set properties of Kenteken TextView
@@ -282,6 +285,7 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                         //TextViewKenteken.setPadding(10, 10, 0, 0);
                         TextViewKenteken.setLayoutParams(kentekenprams);
                         TextViewKenteken.setBackgroundResource(R.drawable.kentekenplaat);
+                        TextViewKenteken.setBackgroundColor(Color.parseColor("#FAFAFA"));
 
                         // set properties of Ergernis TextView
                         TextViewErgernis.setText(ergernis);
@@ -289,6 +293,7 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                         //TextViewErgernis.setTypeface(null, Typeface.BOLD);
                         TextViewErgernis.setPadding(10, 10, 0, 10);
                         TextViewErgernis.setLayoutParams(tprams);
+                        TextViewErgernis.setBackgroundColor(Color.parseColor("#FAFAFA"));
 
                         //Find linear layout for placing results'
                         LinearLayout l = (LinearLayout) findViewById(R.id.linearlayout);
