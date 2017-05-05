@@ -221,88 +221,143 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                         final int index = i;
 
                         //Create layout to hold single spot
-                        final LinearLayout Layout = new LinearLayout(mContext);
+                        final LinearLayout HLayout = new LinearLayout(mContext);
 
                         //Set layout properties
-                        LinearLayout.LayoutParams lprams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams Hparams = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
+                                LinearLayout.LayoutParams.MATCH_PARENT
                         );
                         //Set margins
-                        lprams.setMargins(16, 16, 16, 0);
+                        Hparams.setMargins(16, 16, 16, 0);
                         //Change background
-                        Layout.setBackgroundResource(R.drawable.bottom_border);
-                        Layout.setClickable(true);
-
+                        HLayout.setBackgroundResource(R.drawable.bottom_border);
+                        HLayout.setClickable(true);
+                        HLayout.setPadding(0,10,0,0);
                         //Make layout vertical
-                        Layout.setOrientation(LinearLayout.VERTICAL);
-
-                        //Apply defined parameters to layout
-                        Layout.setLayoutParams(lprams);
-
+                        HLayout.setOrientation(LinearLayout.HORIZONTAL);
+                        //Apply defined parameters to Vertical layout
+                        HLayout.setLayoutParams(Hparams);
 
                         //Set onclick listener for layout
-                        Layout.setOnClickListener(new View.OnClickListener() {
+                        HLayout.setOnClickListener(new View.OnClickListener() {
                             public void onClick(View v) {
                                 Log.v("TAG", "The index is " + index);
                             }
                         });
 
-                        //Set layout properties
-                        LinearLayout.LayoutParams tprams = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.MATCH_PARENT
-                        );
+                        //Create imageview for image
+                        final ImageView SpotImage = new ImageView(mContext);
 
                         //Set layout properties
-                        LinearLayout.LayoutParams kentekenprams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams Imageparams = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.MATCH_PARENT
+                                LinearLayout.LayoutParams.WRAP_CONTENT
                         );
-                        kentekenprams.height = 74;
-                        kentekenprams.width = 300;
+                        //Imageparams.height = 100;
+                        //Imageparams.width = 100;
+                        Imageparams.gravity = Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL;
 
-                        kentekenprams.setMargins(5,5,0,0);
+                        SpotImage.setBackgroundResource(R.drawable.ic_room_black_24dp);
+                        SpotImage.setLayoutParams(Imageparams);
 
-                        // create two new textviews for Date and ergernis
-                        final TextView TextViewDate = new TextView(mContext);
-                        final TextView TextViewErgernis = new TextView(mContext);
+                        //Create layout to hold kenteken and ergernis
+                        final LinearLayout VLayout = new LinearLayout(mContext);
+
+                        //Set layout properties
+                        LinearLayout.LayoutParams Vparams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT,1f
+                        );
+                        //Set margins
+                        Vparams.setMargins(20, 0, 0, 0);
+                        //Change background
+                        //VLayout.setBackgroundResource(R.drawable.bottom_border);
+                        //VLayout.setClickable(true);
+                        //Make layout vertical
+                        VLayout.setOrientation(LinearLayout.VERTICAL);
+                        //Apply defined parameters to Vertical layout
+                        VLayout.setPadding(0,0,0,10);
+                        VLayout.setLayoutParams(Vparams);
+
+                        //Create textview for kenteken
                         final TextView TextViewKenteken = new TextView(mContext);
 
+                        //Set kenteken layout properties
+                        LinearLayout.LayoutParams Kentekenparams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT
+                        );
+                        //Kentekenparams.height = 74;
+                        //Kentekenparams.width = 300;
 
-                        // set properties of Date TextView
-                        TextViewDate.setText(date);
-                        TextViewDate.setTextSize(12);
-                        //TextViewDate.setTypeface(null, Typeface.BOLD);
-                        TextViewDate.setPadding(10, 10, 0, 0);
-                        TextViewDate.setBackgroundColor(Color.parseColor("#FAFAFA"));
-                        TextViewDate.setLayoutParams(tprams);
+                        Kentekenparams.gravity = Gravity.BOTTOM;
 
                         //set properties of Kenteken TextView
                         TextViewKenteken.setText(kenteken);
-                        TextViewKenteken.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+                        TextViewKenteken.setTextSize(18);
+                        //TextViewKenteken.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
                         TextViewKenteken.setTypeface(null, Typeface.BOLD);
-                        //TextViewKenteken.setPadding(10, 10, 0, 0);
-                        TextViewKenteken.setLayoutParams(kentekenprams);
-                        TextViewKenteken.setBackgroundResource(R.drawable.kentekenplaat);
+                        TextViewKenteken.setPadding(0,0,0,1);
+                        TextViewKenteken.setLayoutParams(Kentekenparams);
+                        //TextViewKenteken.setBackgroundResource(R.drawable.kentekenplaat);
                         TextViewKenteken.setBackgroundColor(Color.parseColor("#FAFAFA"));
 
-                        // set properties of Ergernis TextView
+                        //Create textview for kenteken
+                        final TextView TextViewErgernis = new TextView(mContext);
+
+                        //Set ergernis layout properties
+                        LinearLayout.LayoutParams Ergernisparams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT
+                        );
+                        //Ergernisparams.height = 74;
+                        //Ergernisparams.width = 300;
+
+                        //Ergernisparams.setMargins(5,5,0,0);
+                        Ergernisparams.gravity = Gravity.TOP | Gravity.LEFT;
+
+
+                        //set properties of Kenteken TextView
                         TextViewErgernis.setText(ergernis);
-                        //TextViewErgernis.setTextSize(18);
+                        TextViewErgernis.setTextSize(12);
+                        //TextViewKenteken.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
                         //TextViewErgernis.setTypeface(null, Typeface.BOLD);
-                        TextViewErgernis.setPadding(10, 10, 0, 10);
-                        TextViewErgernis.setLayoutParams(tprams);
+                        TextViewErgernis.setPadding(0, 5, 0,5);
+                        TextViewErgernis.setLayoutParams(Ergernisparams);
+                        //TextViewKenteken.setBackgroundResource(R.drawable.kentekenplaat);
                         TextViewErgernis.setBackgroundColor(Color.parseColor("#FAFAFA"));
+
+                        //Create textview for date
+                        final TextView TextViewDate = new TextView(mContext);
+
+                        //Set date layout properties
+                        LinearLayout.LayoutParams Dateparams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+
+                        Dateparams.setMargins(80,0,0,0);
+                        Dateparams.gravity = Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL;
+
+                        // set properties of Date TextView
+                        TextViewDate.setText(date);
+                        TextViewDate.setTextSize(14);
+                        //TextViewDate.setTypeface(null, Typeface.BOLD);
+                        //TextViewDate.setPadding(10, 10, 0, 0);
+                        TextViewDate.setBackgroundColor(Color.parseColor("#FAFAFA"));
+                        TextViewDate.setLayoutParams(Dateparams);
 
                         //Find linear layout for placing results'
                         LinearLayout l = (LinearLayout) findViewById(R.id.linearlayout);
 
                         // add the textview to the linearlayout
-                        l.addView(Layout);
-                        Layout.addView(TextViewKenteken);
-                        Layout.addView(TextViewDate);
-                        Layout.addView(TextViewErgernis);
+                        l.addView(HLayout);
+                        HLayout.addView(SpotImage);
+                        HLayout.addView(VLayout);
+                        VLayout.addView(TextViewKenteken);
+                        VLayout.addView(TextViewErgernis);
+                        HLayout.addView(TextViewDate);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
