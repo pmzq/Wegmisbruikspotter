@@ -164,7 +164,7 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
         //getJSON(JSON_URL);
         getJSON(JSON_URL);
         Integer size = twoDim.size();
-        Log.v("Test1","laatste");
+        //Log.v("Test1","laatste");
 
     }
 
@@ -227,7 +227,7 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-
+                loading.dismiss();
 
                 //Context context = getApplicationContext();
                 //int duration = Toast.LENGTH_SHORT;
@@ -239,7 +239,23 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
                 try {
 
                     JSONArray json = new JSONArray(s);
-                    Integer test =  json.length();
+                    Integer result =  json.length();
+                    Log.e("test", result.toString());
+
+                    if (result < 2) {
+                        //Log.v("test",id);
+                        //In case of no results
+                        final TextView Message = new TextView(mContext);
+
+                        Message.setText("Geen spots gevonden voor dit kenteken.");
+
+                        //Find linear layout for placing results'
+                        LinearLayout l = (LinearLayout) findViewById(R.id.linearlayout);
+
+                        // add the textview to the linearlayout
+                        l.addView(Message);
+                    }
+
 
                     for (int i = 0; i < json.length()-1; i++) {
 
@@ -247,101 +263,83 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
                         final int index = i;
 
                         JSONObject e = json.getJSONObject(i);
-                        String id = e.getString("id");
-                        String date = e.getString("datum");
-                        String ergernis = e.getString("ergernis");
+                        final String id = e.getString("id");
+                        final String date = e.getString("datum");
+                        final String ergernis = e.getString("ergernis");
 
-                        Log.e("test","------------" + date);
-                        /*
-                        String[] inputLines = { id,date,ergernis };
-
-                        for (String line : inputLines) {
-                            List<String> row = new ArrayList<String>();
-
-                            Scanner a = new Scanner(line);
-                            while (a.hasNext())
-                                row.add(a.next());
-
-                            twoDim.add(row);
-                        }
-
-                        String result = "";
-                        for(int b = 0; b < twoDim.size(); b++){
-                            for(int j = 0; j < twoDim.get(b).size(); j++){
-                                result += twoDim.get(b).get(j);
-                            }
-                            // System.out.println();
-                            result += "\n";
+                        Log.v("test",id);
 
 
-                        }
-                        Log.v("Test1","array gezet");
-                        */
-                        loading.dismiss();
+                            //Log.e("test","------------" + date);
+
+                            //loading.dismiss();
+
+                            //Create layout to hold single spot
+                            final LinearLayout Layout = new LinearLayout(mContext);
+
+                            //Set layout properties
+                            LinearLayout.LayoutParams lprams = new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT
+                            );
+                            //Set margins
+                            lprams.setMargins(16, 16, 16, 0);
+                            //Change background
+                            Layout.setBackgroundResource(R.drawable.bottom_border);
+                            Layout.setClickable(true);
+                            Layout.setPadding(0, 10, 0, 0);
 
 
-                        //Create layout to hold single spot
-                        final LinearLayout Layout = new LinearLayout(mContext);
+                            //Make layout vertical
+                            Layout.setOrientation(LinearLayout.VERTICAL);
 
-                        //Set layout properties
-                        LinearLayout.LayoutParams lprams = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                        );
-                        //Set margins
-                        lprams.setMargins(16, 16, 16, 0);
-                        //Change background
-                        Layout.setBackgroundResource(android.R.drawable.dialog_holo_light_frame);
-                        Layout.setClickable(true);
+                            //Apply defined parameters to layout
+                            Layout.setLayoutParams(lprams);
 
+                            //Set onclick listener for layout
+                            Layout.setOnClickListener(new View.OnClickListener() {
+                                public void onClick(View v) {
+                                    //Log.v("TAG", "The index is " + index);
+                                    Context context = getApplicationContext();
+                                    Intent intent = new Intent(context, Spot.class);
+                                    //String id = marker.getTitle();
+                                    ((Globals) getApplication()).setspotid(id);
+                                    startActivity(intent);
+                                }
+                            });
 
-                        //Make layout horizontal
-                        Layout.setOrientation(LinearLayout.VERTICAL);
+                            //Set layout properties
+                            LinearLayout.LayoutParams tprams = new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                                    LinearLayout.LayoutParams.MATCH_PARENT
+                            );
 
-                        //Apply defined parameters to layout
-                        Layout.setLayoutParams(lprams);
-
-                        //Set onclick listener for layout
-                        Layout.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v) {
-                                Log.v("TAG", "The index is " + index);
-                            }
-                        });
-
-                        //Set layout properties
-                        LinearLayout.LayoutParams tprams = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.MATCH_PARENT
-                        );
-
-                        // create two new textviews for Date and ergernis
-                        final TextView TextViewDate = new TextView(mContext);
-                        final TextView TextViewErgernis = new TextView(mContext);
+                            // create two new textviews for Date and ergernis
+                            final TextView TextViewDate = new TextView(mContext);
+                            final TextView TextViewErgernis = new TextView(mContext);
 
 
+                            // set properties of Date TextView
+                            TextViewDate.setText(date);
+                            TextViewDate.setTextSize(18);
+                            TextViewDate.setTypeface(null, Typeface.BOLD);
+                            TextViewDate.setPadding(10, 10, 0, 0);
+                            TextViewDate.setLayoutParams(tprams);
 
-                        // set properties of Date TextView
-                        TextViewDate.setText(date);
-                        TextViewDate.setTextSize(18);
-                        TextViewDate.setTypeface(null, Typeface.BOLD);
-                        TextViewDate.setPadding(10,10,0,0);
-                        TextViewDate.setLayoutParams(tprams);
+                            // set properties of Ergernis TextView
+                            TextViewErgernis.setText(ergernis);
+                            //TextViewErgernis.setTextSize(18);
+                            //TextViewErgernis.setTypeface(null, Typeface.BOLD);
+                            TextViewErgernis.setPadding(10, 10, 0, 10);
+                            TextViewErgernis.setLayoutParams(tprams);
 
-                        // set properties of Ergernis TextView
-                        TextViewErgernis.setText(ergernis);
-                        //TextViewErgernis.setTextSize(18);
-                        //TextViewErgernis.setTypeface(null, Typeface.BOLD);
-                        TextViewErgernis.setPadding(10,10,0,10);
-                        TextViewErgernis.setLayoutParams(tprams);
+                            //Find linear layout for placing results'
+                            LinearLayout l = (LinearLayout) findViewById(R.id.linearlayout);
 
-                        //Find linear layout for placing results'
-                        LinearLayout l = (LinearLayout) findViewById(R.id.linearlayout);
-
-                        // add the textview to the linearlayout
-                        l.addView(Layout);
-                        Layout.addView(TextViewDate);
-                        Layout.addView(TextViewErgernis);
-
+                            // add the textview to the linearlayout
+                            l.addView(Layout);
+                            Layout.addView(TextViewDate);
+                            Layout.addView(TextViewErgernis);
 
                     }
 

@@ -10,10 +10,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -32,63 +32,64 @@
                 android:id="@+id/img_merk"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
+                android:layout_alignEnd="@+id/kenteken"
+                android:layout_alignRight="@+id/kenteken"
                 android:layout_below="@+id/kenteken"
-                android:layout_margin="10dp"
+                android:layout_marginTop="11dp"
                 app:srcCompat="@color/colorAccent" />
 
             <ImageView
+                android:id="@+id/foto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textAutoMerk"
                 android:layout_alignLeft="@+id/textAutoMerk"
                 android:layout_alignStart="@+id/textAutoMerk"
+                android:layout_below="@+id/textAutoMerk"
                 android:layout_marginLeft="15dp"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="16dp"
-                android:id="@+id/foto" />
+                android:layout_marginTop="16dp" />
 
             <TextView
                 android:id="@+id/textErgernis"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/img_photo"
+                android:layout_marginTop="13dp"
+                android:layout_toEndOf="@+id/foto"
+                android:layout_toRightOf="@+id/foto"
                 android:text="Ergernis:"
                 android:textSize="18sp"
-                tools:textStyle="bold"
-                android:layout_below="@+id/img_photo"
-                android:layout_toRightOf="@+id/foto"
-                android:layout_toEndOf="@+id/foto"
-                android:layout_marginTop="13dp" />
+                tools:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtErgernis"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                tools:textSize="14sp"
                 android:layout_below="@+id/textErgernis"
+                android:layout_toEndOf="@+id/foto"
                 android:layout_toRightOf="@+id/foto"
-                android:layout_toEndOf="@+id/foto" />
+                android:text="TextView"
+                tools:textSize="14sp" />
 
             <EditText
-                android:layout_height="74dp"
-                android:inputType="textCapCharacters"
-                android:ems="10"
                 android:id="@+id/kenteken"
                 android:layout_width="match_parent"
-                android:textSize="@dimen/font_size"
-                android:textCursorDrawable="@drawable/color_cursor"
+                android:layout_height="74dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="58dp"
                 android:background="@drawable/kentekenplaat"
                 android:cursorVisible="true"
-                android:gravity="center_vertical|center_horizontal"
-                tools:layout_editor_absoluteY="129dp"
-                tools:layout_editor_absoluteX="8dp"
+                android:ems="10"
                 android:focusable="false"
-                android:layout_marginTop="32dp"
-                android:layout_below="@+id/foto"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:gravity="center_vertical|center_horizontal"
+                android:inputType="textCapCharacters"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/font_size"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="129dp" />
 
             <EditText
                 android:id="@+id/txtDescription"
@@ -102,31 +103,6 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Name" />
-
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/editText"
-                android:layout_marginEnd="13dp"
-                android:layout_marginRight="13dp"
-                android:layout_marginTop="11dp"
-                android:clickable="true"
-                app:fabSize="mini"
-                app:srcCompat="@drawable/send" />
 
         </RelativeLayout>
     </ScrollView>

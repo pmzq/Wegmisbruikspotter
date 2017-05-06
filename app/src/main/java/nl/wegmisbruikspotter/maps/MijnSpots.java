@@ -254,8 +254,7 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         );
-                        //Imageparams.height = 100;
-                        //Imageparams.width = 100;
+
                         Imageparams.gravity = Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL;
 
                         SpotImage.setBackgroundResource(R.drawable.ic_room_black_24dp);
@@ -271,9 +270,7 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                         );
                         //Set margins
                         Vparams.setMargins(20, 0, 0, 0);
-                        //Change background
-                        //VLayout.setBackgroundResource(R.drawable.bottom_border);
-                        //VLayout.setClickable(true);
+
                         //Make layout vertical
                         VLayout.setOrientation(LinearLayout.VERTICAL);
                         //Apply defined parameters to Vertical layout
@@ -288,19 +285,15 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.MATCH_PARENT
                         );
-                        //Kentekenparams.height = 74;
-                        //Kentekenparams.width = 300;
 
                         Kentekenparams.gravity = Gravity.BOTTOM;
 
                         //set properties of Kenteken TextView
                         TextViewKenteken.setText(kenteken);
                         TextViewKenteken.setTextSize(18);
-                        //TextViewKenteken.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
                         TextViewKenteken.setTypeface(null, Typeface.BOLD);
                         TextViewKenteken.setPadding(0,0,0,1);
                         TextViewKenteken.setLayoutParams(Kentekenparams);
-                        //TextViewKenteken.setBackgroundResource(R.drawable.kentekenplaat);
                         TextViewKenteken.setBackgroundColor(Color.parseColor("#FAFAFA"));
 
                         //Create textview for kenteken
@@ -311,21 +304,15 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.MATCH_PARENT
                         );
-                        //Ergernisparams.height = 74;
-                        //Ergernisparams.width = 300;
 
-                        //Ergernisparams.setMargins(5,5,0,0);
                         Ergernisparams.gravity = Gravity.TOP | Gravity.LEFT;
 
 
                         //set properties of Kenteken TextView
                         TextViewErgernis.setText(ergernis);
                         TextViewErgernis.setTextSize(12);
-                        //TextViewKenteken.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
-                        //TextViewErgernis.setTypeface(null, Typeface.BOLD);
                         TextViewErgernis.setPadding(0, 5, 0,5);
                         TextViewErgernis.setLayoutParams(Ergernisparams);
-                        //TextViewKenteken.setBackgroundResource(R.drawable.kentekenplaat);
                         TextViewErgernis.setBackgroundColor(Color.parseColor("#FAFAFA"));
 
                         //Create textview for date
@@ -337,21 +324,19 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         );
 
-                        Dateparams.setMargins(80,0,0,0);
+                        //Dateparams.setMargins(80,0,0,0);
                         Dateparams.gravity = Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL;
 
                         // set properties of Date TextView
                         TextViewDate.setText(date);
                         TextViewDate.setTextSize(14);
-                        //TextViewDate.setTypeface(null, Typeface.BOLD);
-                        //TextViewDate.setPadding(10, 10, 0, 0);
                         TextViewDate.setBackgroundColor(Color.parseColor("#FAFAFA"));
                         TextViewDate.setLayoutParams(Dateparams);
 
                         //Find linear layout for placing results'
                         LinearLayout l = (LinearLayout) findViewById(R.id.linearlayout);
 
-                        // add the textview to the linearlayout
+                        // Build up the layout.
                         l.addView(HLayout);
                         HLayout.addView(SpotImage);
                         HLayout.addView(VLayout);
