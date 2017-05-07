@@ -59,13 +59,13 @@
             android:layout_height="200dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/btnZoek">
 
                 <LinearLayout
                     android:id="@+id/linearlayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bottom_border"
                     android:orientation="vertical">
 
                 </LinearLayout>

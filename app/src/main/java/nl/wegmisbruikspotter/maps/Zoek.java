@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -163,7 +164,7 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
 
         //getJSON(JSON_URL);
         getJSON(JSON_URL);
-        Integer size = twoDim.size();
+        //Integer size = twoDim.size();
         //Log.v("Test1","laatste");
 
     }
@@ -242,20 +243,33 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
                     Integer result =  json.length();
                     Log.e("test", result.toString());
 
+                    //Find linear layout and remove all child views from possible previous search
+                    LinearLayout l = (LinearLayout) findViewById(R.id.linearlayout);
+                    l.removeAllViews();
+
                     if (result < 2) {
-                        //Log.v("test",id);
+                        Log.v("test","HUH");
                         //In case of no results
                         final TextView Message = new TextView(mContext);
 
-                        Message.setText("Geen spots gevonden voor dit kenteken.");
+                        /*Set layout properties
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        //params.setMargins(16,16,16,0);
+                        //params.gravity = Gravity.CENTER_HORIZONTAL;
+                        */
+                        Message.setGravity(Gravity.CENTER);
 
-                        //Find linear layout for placing results'
-                        LinearLayout l = (LinearLayout) findViewById(R.id.linearlayout);
+                        Message.setText("Geen spots gevonden voor dit kenteken.");
+                        //Message.setLayoutParams(params);
 
                         // add the textview to the linearlayout
                         l.addView(Message);
                     }
-
+                    Integer test = json.length();
+                    Log.v("test",test.toString());
 
                     for (int i = 0; i < json.length()-1; i++) {
 
@@ -267,12 +281,9 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
                         final String date = e.getString("datum");
                         final String ergernis = e.getString("ergernis");
 
-                        Log.v("test",id);
-
-
-                            //Log.e("test","------------" + date);
-
-                            //loading.dismiss();
+                        Integer test1 = index;
+                        String test2 = test1.toString();
+                        Log.v("test",test2);
 
                             //Create layout to hold single spot
                             final LinearLayout Layout = new LinearLayout(mContext);
@@ -288,7 +299,6 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
                             Layout.setBackgroundResource(R.drawable.bottom_border);
                             Layout.setClickable(true);
                             Layout.setPadding(0, 10, 0, 0);
-
 
                             //Make layout vertical
                             Layout.setOrientation(LinearLayout.VERTICAL);
@@ -328,13 +338,9 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
 
                             // set properties of Ergernis TextView
                             TextViewErgernis.setText(ergernis);
-                            //TextViewErgernis.setTextSize(18);
-                            //TextViewErgernis.setTypeface(null, Typeface.BOLD);
                             TextViewErgernis.setPadding(10, 10, 0, 10);
                             TextViewErgernis.setLayoutParams(tprams);
 
-                            //Find linear layout for placing results'
-                            LinearLayout l = (LinearLayout) findViewById(R.id.linearlayout);
 
                             // add the textview to the linearlayout
                             l.addView(Layout);
@@ -354,10 +360,6 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
         }
         GetJSON gj = new GetJSON(this);
         gj.execute(url);
-
-
-
-
 
 
     }
