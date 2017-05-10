@@ -147,6 +147,10 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
             //return true;
 
         } else if (id == R.id.Rankings) {
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context ,Rankings.class);
+            startActivity(intent);
+            //return true;
 
         }
 
@@ -248,7 +252,7 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
                     l.removeAllViews();
 
                     if (result < 2) {
-                        Log.v("test","HUH");
+                        //Log.v("test","HUH");
                         //In case of no results
                         final TextView Message = new TextView(mContext);
 

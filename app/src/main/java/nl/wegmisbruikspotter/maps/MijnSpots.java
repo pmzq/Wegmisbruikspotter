@@ -133,6 +133,10 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
             //return true;
 
         } else if (id == R.id.Rankings) {
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context ,Rankings.class);
+            startActivity(intent);
+            //return true;
 
         }
 

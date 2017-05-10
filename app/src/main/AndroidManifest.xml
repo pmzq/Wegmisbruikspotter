@@ -84,10 +84,14 @@
 
         <!-- <activity android:name=".MainLogin"></activity> -->
 
-        <activity android:name=".MijnSpots"
+        <activity
+            android:name=".MijnSpots"
             android:label="MijnSpots"
-        android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Rankings"
+            android:label="@string/title_activity_rankings"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

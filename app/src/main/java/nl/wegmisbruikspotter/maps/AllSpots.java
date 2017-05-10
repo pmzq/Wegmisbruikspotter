@@ -106,7 +106,10 @@ public class AllSpots extends AppCompatActivity implements OnMapReadyCallback, N
             //return true;
 
         } else if (id == R.id.Rankings) {
-
+            Context context = getApplicationContext();
+            Intent intent = new Intent(context ,Rankings.class);
+            startActivity(intent);
+            //return true;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
