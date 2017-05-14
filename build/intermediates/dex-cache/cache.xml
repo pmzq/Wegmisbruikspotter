@@ -21,15 +21,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\pmzq_\.android\build-cache\e813053607294ba7a4d6f23301bb9e66877764aa\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
-        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_af1df2b3cdda1691239e6013ea24c85aaece84a9\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\pmzq_\.android\build-cache\08632a5d9bcac2ca7cc633a820d544685dad6708\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -66,51 +57,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\pmzq_\.android\build-cache\b3168df524f3dd8aac74cdd23b2f4781bb5effdc\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
-        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_0039d29aec7c20a934f8ad0c7b885e30d397e109\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\pmzq_\.android\build-cache\76e3b34157872275857b5bc0e2b696e227bbba6f\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="0d94c39080a309d1887f50ef68cc96dfe4bc9d01">
-        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_797216a1426283742e7cacd06f5aaadbfb516676\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\pmzq_\.android\build-cache\b7f6d8cee30e047d44852a78e04dd51ca3597c67\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a702630d32c97e927e6385dc6792d7589aefae90\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\pmzq_\.android\build-cache\6d603014a160890135da27f29156c33065164d39\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="734e80dffea7bd76c18ae256822a124c30d85850">
-        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_7ecb2dd9b6ab3628dbda0b2a084b20248e12917f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\pmzq_\.android\build-cache\0dd762406c4153d1af2c4d5b8c5224b71fcc7341\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="30103d98fa5ed824b54af839c85e2111f9bde8ec">
-        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b9e391aa66e43274bfa5ec20d9e917ff6f147bb1\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\pmzq_\.android\build-cache\0aeaf9bf9d6431955e3e0e0c93f6069a722bba8d\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -120,12 +66,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\pmzq_\.android\build-cache\ff2cc20cad29a5fc8b1067ed84674f8f261b8f0d\output\jars\classes.jar"
+        jar="C:\Users\pmzq_\.android\build-cache\b3168df524f3dd8aac74cdd23b2f4781bb5effdc\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
-        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_63edc7fd5183b217786800ac2f56e8d81667ab0b\classes.dex" />
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_0039d29aec7c20a934f8ad0c7b885e30d397e109\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -165,30 +111,39 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\pmzq_\.android\build-cache\b34cd45132e16feb667b9ac9e8b39edeb8289f93\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d5cbc9214ee567ea6ef56fb2707d48e58d240fc2">
+        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_5fc0f99bf27ac1f26e67be69d860b55192912f91\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\pmzq_\.android\build-cache\b7f6d8cee30e047d44852a78e04dd51ca3597c67\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a702630d32c97e927e6385dc6792d7589aefae90\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\pmzq_\.android\build-cache\6d603014a160890135da27f29156c33065164d39\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="734e80dffea7bd76c18ae256822a124c30d85850">
+        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_7ecb2dd9b6ab3628dbda0b2a084b20248e12917f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\pmzq_\.android\build-cache\f8826ea2dc4936ca69cdeab03329bc6d46d6d4c9\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
         <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_282fc92898739d6328df4422270f1e1bb06d02ed\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\pmzq_\.android\build-cache\63b0fa2868fce848c0962520a4637b33d8e441ed\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d38084015027549951cbaea5d5f6fb795cc81151">
-        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_c8aefa12fa80612b7a133014c3b7df5563cad1e8\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\pmzq_\.android\build-cache\ff33af646f3d558e6337eea7ff0371329d5480fc\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b266c8faa5af72e579b9da36ef35053ffed6ac64">
-        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_090a7761d1c3f7a24bf7ea4b30f79cdf754e1c2d\classes.dex" />
     </item>
 
 </items>

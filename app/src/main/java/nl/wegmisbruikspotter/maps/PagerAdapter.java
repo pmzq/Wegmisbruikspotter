@@ -1,40 +1,37 @@
 package nl.wegmisbruikspotter.maps;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.content.ContextCompat;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
 
-public class PagerAdapter extends FragmentPagerAdapter {
-    final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[] { "Spotters", "Misbruikers", "Auto Merk" };
-    private Context context;
+public class PagerAdapter extends FragmentStatePagerAdapter {
+    int mNumOfTabs;
 
-    public PagerAdapter(FragmentManager fm, Context context) {
+    public PagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
-        this.context = context;
-    }
-
-    @Override
-    public int getCount() {
-        return PAGE_COUNT;
+        this.mNumOfTabs = NumOfTabs;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return PageFragment.newInstance(position + 1);
+
+        switch (position) {
+            case 0:
+                Tab1Wegmisbruikers tab1 = new Tab1Wegmisbruikers(); //Wegmisbruikers
+                return tab1;
+            case 1:
+                Tab2Spotters tab2 = new Tab2Spotters(); //Spotters
+                return tab2;
+            case 2:
+                Tab3Automerk tab3 = new Tab3Automerk(); //Auto merk
+                return tab3;
+            default:
+                return null;
+        }
     }
 
-
     @Override
-    public CharSequence getPageTitle(int position) {
-        // Generate title based on item position
-        return tabTitles[position];
+    public int getCount() {
+        return mNumOfTabs;
     }
 }

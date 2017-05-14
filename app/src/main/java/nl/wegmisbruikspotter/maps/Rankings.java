@@ -6,8 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
+import android.support.v4.view.*;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +16,9 @@ import android.view.MenuItem;
 
 
 public class Rankings extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    ViewPager simpleViewPager;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,33 +37,33 @@ public class Rankings extends AppCompatActivity implements NavigationView.OnNavi
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(),
-                Rankings.this));
+        // get the reference of ViewPager and TabLayout
+        simpleViewPager = (ViewPager) findViewById(R.id.simpleViewPager);
+        tabLayout = (TabLayout) findViewById(R.id.simpleTabLayout);
 
-        // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#CCCCCC"));
-        tabLayout.setupWithViewPager(viewPager);
+        // Create a new Tab named "First"
+        TabLayout.Tab firstTab = tabLayout.newTab();
+        firstTab.setText("Misbruikers"); // set the Text for the first Tab
+        firstTab.setIcon(R.drawable.ic_thumb_down_black_24dp); // set an icon for the
 
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            switch (i){
+        // first tab
+        tabLayout.addTab(firstTab); // add  the tab at in the TabLayout
+        // Create a new Tab named "Second"
+        TabLayout.Tab secondTab = tabLayout.newTab();
+        secondTab.setText("Spotters"); // set the Text for the second Tab
+        secondTab.setIcon(R.drawable.ic_thumb_up_black_24dp); // set an icon for the second tab
+        tabLayout.addTab(secondTab); // add  the tab  in the TabLayout
+        // Create a new Tab named "Third"
+        TabLayout.Tab thirdTab = tabLayout.newTab();
+        thirdTab.setText("Auto Merk"); // set the Text for the first Tab
+        thirdTab.setIcon(R.drawable.ic_directions_car_black_24dp); // set an icon for the first tab
+        tabLayout.addTab(thirdTab); // add  the tab at in the TabLayout
 
-                case 0:
-                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_thumb_up_black_24dp);
-                    break;
-                case 1:
-                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_thumb_down_black_24dp);
-                    break;
-                case 2:
-                    tabLayout.getTabAt(i).setIcon(R.drawable.ic_directions_car_black_24dp);
-                    break;
-
-            }
-
-        }
+        android.support.v4.view.PagerAdapter adapter = new PagerAdapter
+                (getSupportFragmentManager(), tabLayout.getTabCount());
+        simpleViewPager.setAdapter(adapter);
+        // addOnPageChangeListener event change the tab on slide
+        simpleViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
