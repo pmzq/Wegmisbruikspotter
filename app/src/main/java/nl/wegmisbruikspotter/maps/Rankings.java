@@ -11,8 +11,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class Rankings extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -64,6 +71,25 @@ public class Rankings extends AppCompatActivity implements NavigationView.OnNavi
         simpleViewPager.setAdapter(adapter);
         // addOnPageChangeListener event change the tab on slide
         simpleViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                simpleViewPager.setCurrentItem(tab.getPosition());
+                Log.v("test",Integer.toString(tab.getPosition()));
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                simpleViewPager.setCurrentItem(tab.getPosition());
+            }
+        });
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

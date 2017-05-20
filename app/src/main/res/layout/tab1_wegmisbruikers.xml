@@ -1,68 +1,169 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/layout_jaar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/scrollView"
+        android:layout_centerHorizontal="false"
+        android:layout_centerInParent="false"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtjaar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Jaar"
+            android:textSize="24sp" />
+
+        <Spinner
+            android:id="@+id/jaar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:spinnerMode="dialog" />
+    </LinearLayout>
+
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/scrollView3"
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_height="400dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView6"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bottom_border"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="1"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/Kenteken"
+                    android:layout_width="182dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/Title"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1.98"
+                    android:background="@drawable/kentekenplaat"
+                    android:cursorVisible="true"
+                    android:ems="10"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:hint="Kenteken"
+                    android:inputType="textCapCharacters"
+                    android:paddingLeft="20dp"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="7.90"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="4"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bottom_border"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="1"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/Kenteken"
+                    android:layout_width="182dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/Title"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1.98"
+                    android:background="@drawable/kentekenplaat"
+                    android:cursorVisible="true"
+                    android:ems="10"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:hint="Kenteken"
+                    android:inputType="textCapCharacters"
+                    android:paddingLeft="20dp"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="7.90"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="4"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
     </ScrollView>
-
-    <LinearLayout
-        android:id="@+id/Linearview1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/scrollView3"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/txtEnd"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/scrollView3"
-            android:layout_toEndOf="@+id/txtStart"
-            android:layout_toRightOf="@+id/txtStart"
-            android:layout_weight="1"
-            android:background="@drawable/edittext_border"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="01-Feb-2017"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/txtStart"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/scrollView3"
-            android:layout_weight="1"
-            android:background="@drawable/edittext_border"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="01-Jan-2017"
-            android:textSize="20sp" />
-
-    </LinearLayout>
 
 </RelativeLayout>
