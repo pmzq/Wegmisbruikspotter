@@ -63,6 +63,8 @@ public class Tab1Wegmisbruikers extends Fragment {
         View v = inflater.inflate(R.layout.tab1_wegmisbruikers, container, false);
         Spinner spinYear = (Spinner) v.findViewById(R.id.jaar);
         spinYear.setAdapter(jaar_adapter);
+        String jaar = "2013";
+        ((Globals) getActivity().getApplication()).setjaar(jaar);
 
         getJSON(JSON_URL, v);
 
@@ -98,17 +100,19 @@ public class Tab1Wegmisbruikers extends Fragment {
 
                 String uri = params[0];
 
-                String kenteken = ((Globals) getActivity().getApplication()).getkenteken();
+                String jaar = ((Globals) getActivity().getApplication()).getjaar();
                 BufferedReader bufferedReader = null;
+
                 try {
+
                     //URL url = new URL(uri);
                     //HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     URL url = new URL(uri);
                     URLConnection con = url.openConnection();
                     StringBuilder sb = new StringBuilder();
 
-                    String data = URLEncoder.encode("kenteken", "UTF-8") + "=" +
-                            URLEncoder.encode(kenteken, "UTF-8");
+                    String data = URLEncoder.encode("jaar", "UTF-8") + "=" +
+                            URLEncoder.encode(jaar, "UTF-8");
 
 
 
@@ -138,46 +142,28 @@ public class Tab1Wegmisbruikers extends Fragment {
                 super.onPostExecute(s);
                 loading.dismiss();
 
-                //Context context = getApplicationContext();
-                //int duration = Toast.LENGTH_SHORT;
-
-                //Toast toast = Toast.makeText(context, s, duration);
-                //toast.show();
-
-                //textViewJSON.setText(s);
                 try {
 
                     JSONArray json = new JSONArray(s);
                     Integer result =  json.length();
-                    Log.e("test", result.toString());
 
                     //Find linear layout and remove all child views from possible previous search
-                    LinearLayout l = (LinearLayout) rootView.findViewById(R.id.linearlayout);
+                    LinearLayout l = (LinearLayout) rootView.findViewById(R.id.linearLayout);
                     l.removeAllViews();
 
                     if (result < 2) {
                         //Log.v("test","HUH");
                         //In case of no results
                         final TextView Message = new TextView(mContext);
-
-                        /*Set layout properties
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                        );
-                        //params.setMargins(16,16,16,0);
-                        //params.gravity = Gravity.CENTER_HORIZONTAL;
-                        */
                         Message.setGravity(Gravity.CENTER);
 
-                        Message.setText("Geen spots gevonden voor dit kenteken.");
+                        Message.setText("Geen misbruikers gevonden voor dit jaar.");
                         //Message.setLayoutParams(params);
 
                         // add the textview to the linearlayout
                         l.addView(Message);
                     }
                     Integer test = json.length();
-                    Log.v("test",test.toString());
 
                     for (int i = 0; i < json.length()-1; i++) {
 
@@ -186,14 +172,10 @@ public class Tab1Wegmisbruikers extends Fragment {
 
                         JSONObject e = json.getJSONObject(i);
                         final String id = e.getString("id");
-                        final String date = e.getString("datum");
-                        final String ergernis = e.getString("ergernis");
+                        final String kenteken = e.getString("kenteken");
+                        final String Spots = e.getString("spots");
 
-                        Integer test1 = index;
-                        String test2 = test1.toString();
-                        Log.v("test",test2);
-
-                        //Create layout to hold single spot
+                        //Create layout to hold one place
                         final LinearLayout Layout = new LinearLayout(mContext);
 
                         //Set layout properties
@@ -206,10 +188,10 @@ public class Tab1Wegmisbruikers extends Fragment {
                         //Change background
                         Layout.setBackgroundResource(R.drawable.bottom_border);
                         Layout.setClickable(true);
-                        Layout.setPadding(0, 10, 0, 0);
+                        //Layout.setPadding(0, 10, 0, 0);
 
                         //Make layout vertical
-                        Layout.setOrientation(LinearLayout.VERTICAL);
+                        Layout.setOrientation(LinearLayout.HORIZONTAL);
 
                         //Apply defined parameters to layout
                         Layout.setLayoutParams(lprams);
@@ -219,42 +201,64 @@ public class Tab1Wegmisbruikers extends Fragment {
                             public void onClick(View v) {
                                 //Log.v("TAG", "The index is " + index);
                                 Context context = getApplicationContext();
-                                Intent intent = new Intent(context, Spot.class);
+                                Intent intent = new Intent(context, Zoek.class);
                                 //String id = marker.getTitle();
-                                ((Globals) getActivity().getApplication()).setspotid(id);
+                                ((Globals) getActivity().getApplication()).setkenteken(kenteken);
                                 startActivity(intent);
                             }
                         });
 
                         //Set layout properties
-                        LinearLayout.LayoutParams tprams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.MATCH_PARENT
+                                LinearLayout.LayoutParams.MATCH_PARENT,1
                         );
 
-                        // create two new textviews for Date and ergernis
-                        final TextView TextViewDate = new TextView(mContext);
-                        final TextView TextViewErgernis = new TextView(mContext);
+                        //Set kenteken layout properties
+                        LinearLayout.LayoutParams params_kenteken = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT,1
+                        );
+
+                        // create three new textviews for Date and ergernis
+                        final TextView TextViewNumber = new TextView(mContext);
+                        final TextView TextViewKenteken = new TextView(mContext);
+                        final TextView TextViewSpots = new TextView(mContext);
+
+
+
+                        // set properties of number TextView
+                        TextViewNumber.setText("hoi");
+                        TextViewNumber.setTextSize(30);
+                        TextViewNumber.setPadding(20, 0, 0, 5);
+                        TextViewNumber.setTypeface(null, Typeface.BOLD);
+                        TextViewNumber.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
+                        TextViewNumber.setLayoutParams(params);
+
+                        // set properties of Ergernis TextView
+                        TextViewKenteken.setText(kenteken);
+                        TextViewKenteken.setPadding(20, 0, 0, 5);
+                        TextViewNumber.setTextSize(24);
+                        TextViewKenteken.setLayoutParams(params_kenteken);
+                        TextViewKenteken.getLayoutParams().height = 32;
+                        TextViewKenteken.getLayoutParams().width = 130;
+                        TextViewKenteken.setBackgroundResource(R.drawable.kentekenplaat);
+                        TextViewKenteken.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
 
 
                         // set properties of Date TextView
-                        TextViewDate.setText(date);
-                        TextViewDate.setTextSize(18);
-                        TextViewDate.setTypeface(null, Typeface.BOLD);
-                        TextViewDate.setPadding(10, 10, 0, 0);
-                        TextViewDate.setLayoutParams(tprams);
-
-                        // set properties of Ergernis TextView
-                        TextViewErgernis.setText(ergernis);
-                        TextViewErgernis.setPadding(10, 10, 0, 10);
-                        TextViewErgernis.setLayoutParams(tprams);
-
+                        TextViewSpots.setText(Spots);
+                        TextViewSpots.setTextSize(30);
+                        TextViewSpots.setPadding(0, 0, 0, 5);
+                        TextViewSpots.setTypeface(null, Typeface.BOLD);
+                        TextViewSpots.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
+                        TextViewSpots.setLayoutParams(params);
 
                         // add the textview to the linearlayout
                         l.addView(Layout);
-                        Layout.addView(TextViewDate);
-                        Layout.addView(TextViewErgernis);
-
+                        Layout.addView(TextViewNumber);
+                        Layout.addView(TextViewKenteken);
+                        Layout.addView(TextViewSpots);
                     }
 
                 } catch (JSONException e) {
