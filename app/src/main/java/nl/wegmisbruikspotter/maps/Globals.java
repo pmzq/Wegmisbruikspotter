@@ -20,6 +20,7 @@ public class Globals extends Application {
     private String spotid;
     private String facebookName;
     private String facebookID;
+    private String jaar;
     private List<List<String>> twoDim;
 
     public String getkenteken() {
@@ -90,5 +91,11 @@ public class Globals extends Application {
     }
     public void setkenteken(List<List<String>> twoDim) {
         this.twoDim = twoDim;
+    }
+
+    public String getjaar() {
+        return jaar;
+    }
+    public void setjaar(String jaar) { this.jaar = jaar;
     }
 }
