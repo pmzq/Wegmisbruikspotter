@@ -35,7 +35,8 @@ import java.util.Calendar;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class Tab1Wegmisbruikers extends Fragment {
-    private static final String JSON_URL = "https://wegmisbruikspotter.000webhostapp.com/m_wegmisbruikers.php";
+   // private static final String JSON_URL = "https://wegmisbruikspotter.000webhostapp.com/m_wegmisbruikers.php";
+    private static final String JSON_URL = "http://www.wegmisbruikspotter.nl/m_wegmisbruikers.php";
 
     public Tab1Wegmisbruikers() {
 // Required empty public constructor
@@ -164,11 +165,12 @@ public class Tab1Wegmisbruikers extends Fragment {
                         l.addView(Message);
                     }
                     Integer test = json.length();
-
+                    Log.v("test","test1");
                     for (int i = 0; i < json.length()-1; i++) {
 
                         //Make variable final
                         final int index = i;
+                        final int rank = index +1;
 
                         JSONObject e = json.getJSONObject(i);
                         final String id = e.getString("id");
@@ -181,7 +183,7 @@ public class Tab1Wegmisbruikers extends Fragment {
                         //Set layout properties
                         LinearLayout.LayoutParams lprams = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
+                                LinearLayout.LayoutParams.MATCH_PARENT
                         );
                         //Set margins
                         lprams.setMargins(16, 16, 16, 0);
@@ -211,13 +213,13 @@ public class Tab1Wegmisbruikers extends Fragment {
                         //Set layout properties
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.MATCH_PARENT,1
+                                LinearLayout.LayoutParams.WRAP_CONTENT,1
                         );
 
                         //Set kenteken layout properties
                         LinearLayout.LayoutParams params_kenteken = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.MATCH_PARENT,1
+                                LinearLayout.LayoutParams.WRAP_CONTENT,1
                         );
 
                         // create three new textviews for Date and ergernis
@@ -228,7 +230,7 @@ public class Tab1Wegmisbruikers extends Fragment {
 
 
                         // set properties of number TextView
-                        TextViewNumber.setText("hoi");
+                        TextViewNumber.setText(Integer.toString(rank));
                         TextViewNumber.setTextSize(30);
                         TextViewNumber.setPadding(20, 0, 0, 5);
                         TextViewNumber.setTypeface(null, Typeface.BOLD);
@@ -237,10 +239,10 @@ public class Tab1Wegmisbruikers extends Fragment {
 
                         // set properties of Ergernis TextView
                         TextViewKenteken.setText(kenteken);
-                        TextViewKenteken.setPadding(20, 0, 0, 5);
-                        TextViewNumber.setTextSize(24);
+                        TextViewKenteken.setPadding(25, 0, 0, 5);
+                        TextViewKenteken.setTextSize(24);
                         TextViewKenteken.setLayoutParams(params_kenteken);
-                        TextViewKenteken.getLayoutParams().height = 32;
+                        TextViewKenteken.getLayoutParams().height = 95;
                         TextViewKenteken.getLayoutParams().width = 130;
                         TextViewKenteken.setBackgroundResource(R.drawable.kentekenplaat);
                         TextViewKenteken.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);

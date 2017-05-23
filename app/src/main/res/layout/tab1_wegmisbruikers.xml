@@ -74,12 +74,13 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/Kenteken"
+                    android:id="@+id/textView4"
                     android:layout_width="130dp"
                     android:layout_height="32dp"
+                    android:layout_below="@+id/Title"
                     android:layout_weight="1"
                     android:background="@drawable/kentekenplaat"
-                    android:cursorVisible="false"
+                    android:cursorVisible="true"
                     android:ems="10"
                     android:gravity="center_vertical|center_horizontal"
                     android:hint="Kenteken"
