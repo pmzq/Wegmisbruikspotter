@@ -49,7 +49,8 @@ public class AllSpots extends AppCompatActivity implements OnMapReadyCallback, N
 
     public GoogleMap mMap;
     public static final String MY_JSON ="MY_JSON";
-    private static final String JSON_URL = "https://wegmisbruikspotter.000webhostapp.com/m_retreivespots.php";
+    //private static final String JSON_URL = "https://wegmisbruikspotter.000webhostapp.com/m_retreivespots.php";
+    private static final String JSON_URL = "http://www.wegmisbruikspotter.nl/m_retreivespots.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

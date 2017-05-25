@@ -52,7 +52,7 @@ import java.util.concurrent.TimeUnit;
 public class Zoek extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String MY_JSON ="MY_JSON";
-    private static final String JSON_URL = "https://wegmisbruikspotter.000webhostapp.com/m_zoek.php";
+    private static final String JSON_URL = "http://www.wegmisbruikspotter.nl/m_zoek.php";
     //private static final String JSON_URL = "https://wegmisbruikspotter.000webhostapp.com/m_retreivespots.php";
     List<List<String>> twoDim = new ArrayList<List<String>>();
 

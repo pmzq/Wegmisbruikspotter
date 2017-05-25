@@ -36,7 +36,7 @@ import java.net.URLEncoder;
 
 public class Spot extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String JSON_URL = "https://wegmisbruikspotter.000webhostapp.com/m_retreivesinglespot.php";
+    private static final String JSON_URL = "http://www.wegmisbruikspotter.nl/m_retreivesinglespot.php";
 
     String kenteken;
     Bitmap b;

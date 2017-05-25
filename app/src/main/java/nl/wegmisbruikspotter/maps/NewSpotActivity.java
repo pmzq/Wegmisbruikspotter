@@ -45,7 +45,7 @@ public class NewSpotActivity extends AsyncTask<String,String,String> {
             try {
                 String kenteken = (String) arg0[0];
                 //String password = (String) arg0[1];
-                String link = "http://wegmisbruikspotter.000webhostapp.com/spotnu.php?kenteken=" + kenteken;
+                String link = "http://www.wegmisbruikspotter.nl/spotnu.php?kenteken=" + kenteken;
 
 
                 URL url = new URL(link);
@@ -71,19 +71,20 @@ public class NewSpotActivity extends AsyncTask<String,String,String> {
                 return new String("Exception: " + e.getMessage());
             }
         } else {
-            Log.e("path", "----------------START SPOT2");
+            Log.e("test", "----------------START SPOT2");
             try {
-                String kenteken = (String) arg0[0];
-                String ergernis = (String) arg0[1];
-                String merk = (String) arg0[2];
-                String description = (String) arg0[3];
-                String lat = (String) arg0[4];
-                String lng = (String) arg0[5];
-                String facebookID = (String) arg0[6];
-                String facebookName = (String) arg0[7];
-                String File_name = (String) arg0[8];
 
-                String link = "https://wegmisbruikspotter.000webhostapp.com/m_spotnu.php";
+                String kenteken =  arg0[0];
+                String ergernis =  arg0[1];
+                String merk =  arg0[2];
+                String description =  arg0[3];
+                String lat =  arg0[4];
+                String lng =  arg0[5];
+                String facebookID =  arg0[6];
+                String facebookName =  arg0[7];
+                String File_name =  arg0[8];
+
+                String link = "http://www.wegmisbruikspotter.nl/m_spotnu.php?";
                 //String link = "http://wegmisbruikspotter.ezyro.com/m_spotnu.php";
                 String data = URLEncoder.encode("kenteken", "UTF-8") + "=" +
                         URLEncoder.encode(kenteken, "UTF-8");
@@ -106,7 +107,7 @@ public class NewSpotActivity extends AsyncTask<String,String,String> {
 
                 //https://wegmisbruikspotter.000webhostapp.com/m_spotnu.php?kenteken=ABC&ergernis=Bumperkleven&merk=Audi&description=test1&latitude=52.333290&longitude=6.084533&facebookID=123
 
-                URL url = new URL(link);
+                URL url = new URL(link+data);
                 URLConnection conn = url.openConnection();
 
                 conn.setDoOutput(true);

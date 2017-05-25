@@ -79,7 +79,7 @@ public class MainLogin extends Activity {
                             String facebookID = getCurrentAccessToken().getUserId();
                             ((Globals) getApplication()).setfacebookID(facebookID);
                             ((Globals) getApplication()).setfacebookName(profile.getFirstName());
-                            Log.v(TAG, "Logged, user name=" + profile2.getFirstName());
+                            //Log.v(TAG, "Logged, user name=" + profile2.getFirstName());
                             startActivity(intent);
                             mProfileTracker.stopTracking();
                         }

@@ -73,9 +73,10 @@ public class MainActivity extends AppCompatActivity
     String longitude;
     Double lat;
     Double lng;
-    String File_name;
+    String File_name = "none";
     Context context = this;
-    public static String URL = "https://wegmisbruikspotter.000webhostapp.com/upload_image.php";
+    public static String URL = "http://www.wegmisbruikspotter.nl/upload_image.php";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -447,11 +448,14 @@ public class MainActivity extends AppCompatActivity
             String latitude = ((Globals) this.getApplication()).getlatitude();
             String longitude = ((Globals) this.getApplication()).getlongitude();
             String facebookID = ((Globals) this.getApplication()).getfacebookID();
-            String facebookName = ((Globals) this.getApplication()).getfacebookID();
-            new NewSpotActivity(this, 1).execute(kenteken, ergernis, merk, description, latitude, longitude,facebookID,facebookName, File_name);
+            String facebookName = ((Globals) this.getApplication()).getfacebookName();
+
+            new NewSpotActivity(this, 1).execute(kenteken, ergernis, merk, description, latitude, longitude,facebookID,facebookName,File_name);
 
             //upload image
-            new uploadToServer().execute();
+            if (File_path !="" ){
+                //new uploadToServer().execute();
+            }
         }
     }
 

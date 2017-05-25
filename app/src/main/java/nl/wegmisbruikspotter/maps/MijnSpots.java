@@ -39,7 +39,7 @@ import static nl.wegmisbruikspotter.maps.R.dimen.font_size;
 
 public class MijnSpots extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String JSON_URL = "https://wegmisbruikspotter.000webhostapp.com/m_mijnspots.php";
+    private static final String JSON_URL = "http://www.wegmisbruikspotter.nl/m_mijnspots.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
