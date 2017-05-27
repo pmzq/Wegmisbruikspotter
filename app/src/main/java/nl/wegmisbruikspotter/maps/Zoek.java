@@ -73,6 +73,15 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        String kenteken = ((Globals) getApplication()).getkenteken();
+
+        //When kenteken is gevuld start serach immidiatly
+        if(kenteken != "") {
+            EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
+            kenteken_text.setText(kenteken);
+
+            Zoek();
+        }
     }
 
     @Override
@@ -160,7 +169,7 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     //Run when Zoek is pressed.
-    public void Zoek(View view) {
+    public void Zoek() {
 
         EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
         String kenteken = kenteken_text.getText().toString();

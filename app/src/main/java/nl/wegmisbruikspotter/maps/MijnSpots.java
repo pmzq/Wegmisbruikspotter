@@ -215,6 +215,7 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
 
                     for (int i = 0; i < json.length(); i++) {
                         JSONObject e = json.getJSONObject(i);
+                        final String id = e.getString("id");
                         String kenteken = e.getString("kenteken");
                         String ergernis = e.getString("ergernis");
                         String description = e.getString("description");
@@ -247,6 +248,18 @@ public class MijnSpots extends AppCompatActivity implements NavigationView.OnNav
                         HLayout.setOnClickListener(new View.OnClickListener() {
                             public void onClick(View v) {
                                 Log.v("TAG", "The index is " + index);
+                            }
+                        });
+
+                        //Set onclick listener for layout
+                        HLayout.setOnClickListener(new View.OnClickListener() {
+                            public void onClick(View v) {
+                                //Log.v("TAG", "The index is " + index);
+                                Context context = getApplicationContext();
+                                Intent intent = new Intent(context, Spot.class);
+                                //String id = marker.getTitle();
+                                ((Globals) getApplication()).setspotid(id);
+                                startActivity(intent);
                             }
                         });
 

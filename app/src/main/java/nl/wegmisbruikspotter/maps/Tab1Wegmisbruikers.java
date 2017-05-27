@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -54,20 +55,42 @@ public class Tab1Wegmisbruikers extends Fragment {
 
         ArrayList<String> years = new ArrayList<String>();
         int thisYear = Calendar.getInstance().get(Calendar.YEAR);
-        for (int i = 2010; i <= thisYear; i++) {
+        for (int i = 2012; i <= thisYear; i++) {
             years.add(Integer.toString(i));
         }
         ArrayAdapter<String> jaar_adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, years);
         Log.v("test",Integer.toString(thisYear));
 
 
-        View v = inflater.inflate(R.layout.tab1_wegmisbruikers, container, false);
+
+        final View v = inflater.inflate(R.layout.tab1_wegmisbruikers, container, false);
         Spinner spinYear = (Spinner) v.findViewById(R.id.jaar);
         spinYear.setAdapter(jaar_adapter);
-        String jaar = "2013";
+        String jaar = Integer.toString(thisYear);
         ((Globals) getActivity().getApplication()).setjaar(jaar);
 
         getJSON(JSON_URL, v);
+
+        int spinnerPosition = jaar_adapter.getPosition(Integer.toString(thisYear));
+        spinYear.setSelection(spinnerPosition);
+
+        final int iCurrentSelection = spinYear.getSelectedItemPosition();
+
+        spinYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (iCurrentSelection != position){
+                    Jaar(v);
+                }
+                //iCurrentSelection = position;
+                Log.v("test","testnow");
+                }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
 
         // Inflate the layout for this fragment
         return v;
@@ -283,8 +306,8 @@ public class Tab1Wegmisbruikers extends Fragment {
 
         Spinner jaar_spinner = (Spinner) view.findViewById(R.id.jaar);
         String jaar = jaar_spinner.getSelectedItem().toString();
-        ((Globals) getActivity().getApplication()).setkenteken(jaar);
-
+        ((Globals) getActivity().getApplication()).setjaar(jaar);
+        Log.v("test",jaar);
         //getJSON(JSON_URL);
         getJSON(JSON_URL,view);
         //Integer size = twoDim.size();
