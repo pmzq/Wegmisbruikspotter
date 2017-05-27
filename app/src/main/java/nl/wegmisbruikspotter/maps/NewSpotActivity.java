@@ -104,7 +104,7 @@ public class NewSpotActivity extends AsyncTask<String,String,String> {
                         URLEncoder.encode(facebookName, "UTF-8");
                 data += "&" + URLEncoder.encode("filename", "UTF-8") + "=" +
                         URLEncoder.encode(File_name, "UTF-8");
-
+Log.v("test",File_name);
                 //https://wegmisbruikspotter.000webhostapp.com/m_spotnu.php?kenteken=ABC&ergernis=Bumperkleven&merk=Audi&description=test1&latitude=52.333290&longitude=6.084533&facebookID=123
 
                 URL url = new URL(link+data);

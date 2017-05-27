@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity
     String picturePath;
     Uri selectedImage;
     Bitmap photo;
-    String File_path;
+    public String File_path;
 
 
     String kenteken;
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity
     String longitude;
     Double lat;
     Double lng;
-    String File_name = "none";
+    public String File_name = "none";
     Context context = this;
     public static String URL = "http://www.wegmisbruikspotter.nl/upload_image.php";
 
@@ -329,6 +329,10 @@ public class MainActivity extends AppCompatActivity
                 //String File_name;
                 //File_name = f.getName();
 
+                Long Time;
+                Time = System.currentTimeMillis();
+                File_name = Time.toString();
+
                 //Add selected image to imageview.
                 InputStream inputStream = context.getContentResolver().openInputStream(data.getData());
                 Bitmap newProfilePic = BitmapFactory.decodeStream(inputStream);
@@ -454,7 +458,7 @@ public class MainActivity extends AppCompatActivity
 
             //upload image
             if (File_path !="" ){
-                //new uploadToServer().execute();
+                new uploadToServer().execute();
             }
         }
     }
@@ -500,10 +504,6 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         protected String doInBackground(Void... params) {
-
-            Long Time;
-            Time = System.currentTimeMillis();
-            File_name = Time.toString();
 
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("base64", File_path));

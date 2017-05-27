@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -209,7 +210,7 @@ public class Spot extends AppCompatActivity implements NavigationView.OnNavigati
                         TextView ergernis_text = (TextView) findViewById(R.id.txtErgernis);
                         ergernis_text.setText(ergernis);
 
-                        EditText description_text = (EditText) findViewById(R.id.txtDescription);
+                        TextView description_text = (TextView) findViewById(R.id.txtDescription);
                         description_text.setText(description);
 
                         //Set merk image
@@ -239,11 +240,13 @@ public class Spot extends AppCompatActivity implements NavigationView.OnNavigati
         protected String doInBackground(String... arg0) {
 
             String test = (String) arg0[0];
+
             try
             {
-                URL url = new URL("https://wegmisbruikspotter.000webhostapp.com/Images/"+test+".jpg");
+                URL url = new URL("http://www.wegmisbruikspotter.nl/images/"+test+".jpg");
                 InputStream is = new BufferedInputStream(url.openStream());
                 b = BitmapFactory.decodeStream(is);
+
 
             } catch(Exception e){}
             return null;
@@ -251,6 +254,7 @@ public class Spot extends AppCompatActivity implements NavigationView.OnNavigati
 
         @Override
         protected void onPostExecute(String result) {
+
             img.setImageBitmap(b);
         }
     }
