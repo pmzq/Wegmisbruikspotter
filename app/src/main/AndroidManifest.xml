@@ -91,7 +91,8 @@
         <activity
             android:name=".Rankings"
             android:label="@string/title_activity_rankings"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".FullScreenImageActivity"></activity>
     </application>
 
 </manifest>

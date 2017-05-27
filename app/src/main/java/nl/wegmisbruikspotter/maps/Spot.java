@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -256,6 +257,17 @@ public class Spot extends AppCompatActivity implements NavigationView.OnNavigati
         protected void onPostExecute(String result) {
 
             img.setImageBitmap(b);
+
+            //Set onclick listener for layout
+            img.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Context context = getApplicationContext();
+                    Intent intent = new Intent(context, FullScreenImageActivity.class);
+                    ((Globals) getApplication()).setImageUrl("http://www.wegmisbruikspotter.nl/images/"+Image+".jpg");
+                    startActivity(intent);
+                }
+            });
         }
     }
+
 }

@@ -22,6 +22,7 @@ public class Globals extends Application {
     private String facebookID;
     private String jaar;
     private List<List<String>> twoDim;
+    private String ImageUrl;
 
     public String getkenteken() {
         return kenteken;
@@ -96,6 +97,9 @@ public class Globals extends Application {
     public String getjaar() {
         return jaar;
     }
-    public void setjaar(String jaar) { this.jaar = jaar;
+    public void setjaar(String jaar) { this.jaar = jaar;}
+
+    public String getImageUrl() { return ImageUrl; }
+    public void setImageUrl(String ImageUrl) { this.ImageUrl = ImageUrl;
     }
 }

@@ -12,6 +12,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e4c1e5029d85e6f4d91f536161df4ce1ae1f663a">
+        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_baff87dc622c04d5cfc5e783f2a8670c25d7fccf\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\pmzq_\.android\build-cache\a93376c4f0abdb410eb6b8cc16fe31563ad45292\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -21,21 +30,21 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="c409c116d671b705b079bd4e71648cfb8734d4fb">
-        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_baff87dc622c04d5cfc5e783f2a8670c25d7fccf\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\pmzq_\.android\build-cache\b2b7dd3249942fd9c10f71622f33ee9fab103ebd\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="914f5d3e3ace66080e59613708f06d129a222e25">
         <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a29d3a42bb26aca0ab416f7ea9853003cfb12803\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\pmzq_\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.5.2\ecf534dba3a8446ce84cbb797d314763be212a68\glide-3.5.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ecf534dba3a8446ce84cbb797d314763be212a68">
+        <dex dex="C:\Users\pmzq_\AndroidStudioProjects\Maps\app\build\intermediates\transforms\dex\debug\folders\1000\10\glide-3.5.2_da7a8d67429518929b00ca4f565fb6a9d7ab59c9\classes.dex" />
     </item>
     <item
         is-multidex="true"

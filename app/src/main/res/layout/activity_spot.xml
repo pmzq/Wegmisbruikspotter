@@ -26,6 +26,7 @@
                 android:layout_alignTop="@+id/img_merk"
                 android:layout_toEndOf="@+id/foto"
                 android:layout_toRightOf="@+id/foto"
+                android:onClick="ClickPhoto"
                 app:srcCompat="@color/colorAccent" />
 
             <ImageView
