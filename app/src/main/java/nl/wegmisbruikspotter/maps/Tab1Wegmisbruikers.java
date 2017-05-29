@@ -301,7 +301,7 @@ public class Tab1Wegmisbruikers extends Fragment {
 
     }
 
-    //Run when Zoek is pressed.
+    //Run when jaar is chosen.
     public void Jaar(View view) {
 
         Spinner jaar_spinner = (Spinner) view.findViewById(R.id.jaar);
