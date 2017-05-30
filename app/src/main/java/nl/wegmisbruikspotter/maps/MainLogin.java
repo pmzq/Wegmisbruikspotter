@@ -49,11 +49,12 @@ public class MainLogin extends Activity {
         setContentView(R.layout.activity_main_login);
         info = (TextView)findViewById(R.id.info);
         //loginButton = (LoginButton)findViewById(R.id.login_button);
-
+        //LoginManager.getInstance().logOut();
         Profile profile = Profile.getCurrentProfile();
         if (profile != null) {
-            //Log.v(TAG, "Logged, user name=" + profile.getFirstName() + " " + profile.getLastName());
-            String facebookID = getCurrentAccessToken().getUserId();
+            Log.v("test", "Logged, user name=" + profile.getFirstName() + " " + profile.getLastName());
+            Log.v("test",AccessToken.getCurrentAccessToken().getUserId());
+            String facebookID = AccessToken.getCurrentAccessToken().getUserId();
             ((Globals) getApplication()).setfacebookName(profile.getFirstName());
             ((Globals) getApplication()).setfacebookID(facebookID);
             Intent intent = new Intent(this, MainActivity.class);
@@ -76,6 +77,7 @@ public class MainLogin extends Activity {
                             // profile2 is the new profile
                             //Log.v("facebook - profile", profile2.getFirstName());
                             Intent intent = new Intent(MainLogin.this, MainActivity.class);
+
                             String facebookID = getCurrentAccessToken().getUserId();
                             ((Globals) getApplication()).setfacebookID(facebookID);
                             ((Globals) getApplication()).setfacebookName(profile.getFirstName());
