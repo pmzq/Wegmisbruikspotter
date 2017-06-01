@@ -200,6 +200,11 @@ public class Tab1Wegmisbruikers extends Fragment {
                         final String kenteken = e.getString("kenteken");
                         final String Spots = e.getString("spots");
 
+                        //Get machine width and height
+                        final View parentView= rootView.findViewById(R.id.mainContent);
+                        int height=parentView.getHeight();
+                        int width=parentView.getWidth();
+
                         //Create layout to hold one place
                         final LinearLayout Layout = new LinearLayout(mContext);
 
@@ -235,15 +240,12 @@ public class Tab1Wegmisbruikers extends Fragment {
 
                         //Set layout properties
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT,1
+                                (int) (width * .25),
+                                LinearLayout.LayoutParams.WRAP_CONTENT
                         );
 
                         //Set kenteken layout properties
-                        LinearLayout.LayoutParams params_kenteken = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT,1
-                        );
+                        LinearLayout.LayoutParams params_kenteken = new LinearLayout.LayoutParams((int) (width * .50),95);
 
                         // create three new textviews for Date and ergernis
                         final TextView TextViewNumber = new TextView(mContext);
@@ -265,8 +267,8 @@ public class Tab1Wegmisbruikers extends Fragment {
                         TextViewKenteken.setPadding(25, 0, 0, 5);
                         TextViewKenteken.setTextSize(24);
                         TextViewKenteken.setLayoutParams(params_kenteken);
-                        TextViewKenteken.getLayoutParams().height = 95;
-                        TextViewKenteken.getLayoutParams().width = 130;
+                        //TextViewKenteken.getLayoutParams().height = 95;
+                        //TextViewKenteken.getLayoutParams().width = 130;
                         TextViewKenteken.setBackgroundResource(R.drawable.kentekenplaat);
                         TextViewKenteken.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
 
@@ -307,7 +309,6 @@ public class Tab1Wegmisbruikers extends Fragment {
         Spinner jaar_spinner = (Spinner) view.findViewById(R.id.jaar);
         String jaar = jaar_spinner.getSelectedItem().toString();
         ((Globals) getActivity().getApplication()).setjaar(jaar);
-        Log.v("test",jaar);
         //getJSON(JSON_URL);
         getJSON(JSON_URL,view);
         //Integer size = twoDim.size();

@@ -193,6 +193,11 @@ public class Tab3Automerk extends Fragment {
                         final String merk_main = e.getString("merk");
                         final String Spots = e.getString("spots");
 
+                        //Get machine width and height
+                        final View parentView= rootView.findViewById(R.id.mainContent);
+                        int height=parentView.getHeight();
+                        int width=parentView.getWidth();
+
                         //Create layout to hold one place
                         final LinearLayout Layout = new LinearLayout(mContext);
 
@@ -211,41 +216,38 @@ public class Tab3Automerk extends Fragment {
                         //Make layout vertical
                         Layout.setOrientation(LinearLayout.HORIZONTAL);
 
+                        Layout.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
+
                         //Apply defined parameters to layout
                         Layout.setLayoutParams(lprams);
 
                         //Set layout properties
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT,1
-                        );
-
-                        //Set kenteken layout properties
-                        LinearLayout.LayoutParams params_kenteken = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT,1
+                                (int) (width * .20),
+                                LinearLayout.LayoutParams.WRAP_CONTENT
                         );
 
                         //Create imageview for image
                         final ImageView MerkImage = new ImageView(mContext);
 
                         //Set layout properties
-                        LinearLayout.LayoutParams Imageparams = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                        );
+                        LinearLayout.LayoutParams Imageparams = new LinearLayout.LayoutParams(150,150);
+
+                        Imageparams.setMargins(100, 0, 100, 0);
 
                         Imageparams.gravity = Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL;
 
                         //MerkImage.setBackgroundResource(R.drawable.ic_room_black_24dp);
                         //Set merk image
+                        //MerkImage.getLayoutParams().height = 50;
+                        //MerkImage.getLayoutParams().width = 50;
                         String merk_low = merk_main.toLowerCase();
                         String merk = merk_low.replaceAll("\\s+","");
                         int merk_imageID = getResources().getIdentifier(merk, "drawable" , mContext.getPackageName());
                         Log.v("test",Integer.toString(merk_imageID));
                         //ImageView imageView = (ImageView) rootView.findViewById(R.id.img_merk);
                         MerkImage.setImageResource(merk_imageID);
-
+                        MerkImage.setPadding(0, 0, 0, 10);
                         MerkImage.setLayoutParams(Imageparams);
 
                         // create three new textviews for Date and ergernis
@@ -264,7 +266,7 @@ public class Tab3Automerk extends Fragment {
                         TextViewNumber.setLayoutParams(params);
 
                         // set properties of Ergernis TextView
-                        TextViewMerk.setText(merk_main);
+                        /*TextViewMerk.setText(merk_main);
                         TextViewMerk.setPadding(25, 0, 0, 5);
                         TextViewMerk.setTextSize(24);
                         TextViewMerk.setLayoutParams(params_kenteken);
@@ -272,7 +274,7 @@ public class Tab3Automerk extends Fragment {
                         TextViewMerk.getLayoutParams().width = 130;
                         //TextViewUser.setBackgroundResource(R.drawable.kentekenplaat);
                         TextViewMerk.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
-
+                        */
 
                         // set properties of Date TextView
                         TextViewSpots.setText(Spots);

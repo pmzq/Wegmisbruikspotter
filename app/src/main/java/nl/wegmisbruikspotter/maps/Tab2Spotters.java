@@ -196,6 +196,11 @@ public class Tab2Spotters extends Fragment {
                         final String user = e.getString("user");
                         final String Spots = e.getString("spots");
 
+                        //Get machine width and height
+                        final View parentView= rootView.findViewById(R.id.mainContent);
+                        int height=parentView.getHeight();
+                        int width=parentView.getWidth();
+
                         //Create layout to hold one place
                         final LinearLayout Layout = new LinearLayout(mContext);
 
@@ -229,16 +234,16 @@ public class Tab2Spotters extends Fragment {
                             }
                         });*/
 
-                        //Set layout properties
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT,1
+                        //Set lnumber_ayout properties
+                        LinearLayout.LayoutParams number_params = new LinearLayout.LayoutParams(
+                                (int) (width * .20),LinearLayout.LayoutParams.WRAP_CONTENT
+
                         );
 
-                        //Set kenteken layout properties
-                        LinearLayout.LayoutParams params_kenteken = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT,1
+                        //Set users layout properties
+                        LinearLayout.LayoutParams params_user = new LinearLayout.LayoutParams(
+                                (int) (width * .60),LinearLayout.LayoutParams.WRAP_CONTENT
+
                         );
 
                         // create three new textviews for Date and ergernis
@@ -246,23 +251,29 @@ public class Tab2Spotters extends Fragment {
                         final TextView TextViewUser = new TextView(mContext);
                         final TextView TextViewSpots = new TextView(mContext);
 
-
-
                         // set properties of number TextView
                         TextViewNumber.setText(Integer.toString(rank));
                         TextViewNumber.setTextSize(30);
                         TextViewNumber.setPadding(20, 0, 0, 5);
                         TextViewNumber.setTypeface(null, Typeface.BOLD);
                         TextViewNumber.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
-                        TextViewNumber.setLayoutParams(params);
+                        Log.v("test","test2");
+                        //Set testNumber width to 15%
+                        //TextViewNumber.getLayoutParams().width = (int) (width * .15);
+                        TextViewNumber.setLayoutParams(number_params);
 
                         // set properties of Ergernis TextView
                         TextViewUser.setText(user);
                         TextViewUser.setPadding(25, 0, 0, 5);
                         TextViewUser.setTextSize(24);
-                        TextViewUser.setLayoutParams(params_kenteken);
-                        TextViewUser.getLayoutParams().height = 95;
-                        TextViewUser.getLayoutParams().width = 130;
+                        TextViewUser.setLayoutParams(params_user);
+                        //TextViewUser.getLayoutParams().height = 95;
+
+
+
+                        //Set testuser width to 70%
+                        //TextViewUser.getLayoutParams().width = (int) (width * .70);
+
                         //TextViewUser.setBackgroundResource(R.drawable.kentekenplaat);
                         TextViewUser.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
 
@@ -273,7 +284,9 @@ public class Tab2Spotters extends Fragment {
                         TextViewSpots.setPadding(0, 0, 0, 5);
                         TextViewSpots.setTypeface(null, Typeface.BOLD);
                         TextViewSpots.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
-                        TextViewSpots.setLayoutParams(params);
+                        //Set testspots width to 15%
+                        //TextViewSpots.getLayoutParams().width = (int) (width * .15);
+                        TextViewSpots.setLayoutParams(number_params);
 
                         // add the textview to the linearlayout
                         l.addView(Layout);
