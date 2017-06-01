@@ -6,9 +6,22 @@
     android:layout_height="match_parent"
     tools:context="nl.wegmisbruikspotter.maps.MainActivity">
 
-    <include layout="@layout/activity_all_spots"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent" />
+    <include
+        layout="@layout/activity_all_spots"
+        android:layout_width="match_parent"
+        android:layout_height="503dp" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@android:drawable/btn_dropdown"
+        android:gravity="center_vertical|center_horizontal"
+        android:spinnerMode="dialog" />
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
