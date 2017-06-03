@@ -9,10 +9,10 @@
     <include
         layout="@layout/activity_all_spots"
         android:layout_width="match_parent"
-        android:layout_height="503dp" />
+        android:layout_height="match_parent" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/jaar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"

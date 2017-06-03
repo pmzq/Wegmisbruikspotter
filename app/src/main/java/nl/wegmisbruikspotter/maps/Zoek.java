@@ -75,12 +75,23 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
 
         String kenteken = ((Globals) getApplication()).getkenteken();
 
+        Button Zoek = (Button) findViewById(R.id.btnZoek);
+
+        //Set onclick listener for layout
+        Zoek.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //Log.v("TAG", "The index is " + index);
+                Context context = getApplicationContext();
+                Zoek1();
+            }
+        });
+
         //When kenteken is gevuld start serach immidiatly
         if(kenteken != "") {
             EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
             kenteken_text.setText(kenteken);
 
-            Zoek();
+            Zoek1();
         }
     }
 
@@ -169,7 +180,7 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     //Run when Zoek is pressed.
-    public void Zoek() {
+    public void Zoek1() {
 
         EditText kenteken_text = (EditText) findViewById(R.id.kenteken);
         String kenteken = kenteken_text.getText().toString();

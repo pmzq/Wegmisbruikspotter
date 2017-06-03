@@ -30,8 +30,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,8 +44,13 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class AllSpots extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
@@ -74,6 +82,44 @@ public class AllSpots extends AppCompatActivity implements OnMapReadyCallback, N
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ArrayList<String> years = new ArrayList<String>();
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        for (int i = 2012; i <= thisYear; i++) {
+            years.add(Integer.toString(i));
+        }
+        ArrayAdapter<String> jaar_adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, years);
+        Log.v("test",Integer.toString(thisYear));
+
+
+
+        //final View v = inflater.inflate(R.layout.tab1_wegmisbruikers, container, false);
+        Spinner spinYear = (Spinner) findViewById(R.id.jaar);
+        spinYear.setAdapter(jaar_adapter);
+        String jaar = Integer.toString(thisYear);
+        ((Globals) getApplication()).setjaar(jaar);
+
+        getJSON(JSON_URL);
+
+        int spinnerPosition = jaar_adapter.getPosition(Integer.toString(thisYear));
+        spinYear.setSelection(spinnerPosition);
+
+        final int iCurrentSelection = spinYear.getSelectedItemPosition();
+
+        spinYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                //if (iCurrentSelection != position){
+                    Jaar(parentView);
+                //}
+                //iCurrentSelection = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
 
     }
 
@@ -136,9 +182,9 @@ public class AllSpots extends AppCompatActivity implements OnMapReadyCallback, N
         LatLng Nederland = new LatLng(52.1883501, 5.0638998);
         //mMap.addMarker(new MarkerOptions().position(Nederland).title(""));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(Nederland));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo( 8.0f ) );
+        mMap.animateCamera(CameraUpdateFactory.zoomTo( 7.0f ) );
         //Get JSON result of all spots
-        getJSON(JSON_URL);
+        //getJSON(JSON_URL);
 
         /*//set on marker click listeners
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
@@ -230,17 +276,31 @@ public class AllSpots extends AppCompatActivity implements OnMapReadyCallback, N
 
                 String uri = params[0];
 
+                String jaar = ((Globals) getApplication()).getjaar();
                 BufferedReader bufferedReader = null;
+
                 try {
+
+                    //URL url = new URL(uri);
+                    //HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     URL url = new URL(uri);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    URLConnection con = url.openConnection();
                     StringBuilder sb = new StringBuilder();
+
+                    String data = URLEncoder.encode("jaar", "UTF-8") + "=" +
+                            URLEncoder.encode(jaar, "UTF-8");
+
+                    con.setDoOutput(true);
+                    OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
+
+                    wr.write(data);
+                    wr.flush();
 
                     bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
                     String json;
                     while((json = bufferedReader.readLine())!= null){
-                        sb.append(json+"\n");
+                        sb.append(json);
                     }
 
                     return sb.toString().trim();
@@ -269,7 +329,7 @@ public class AllSpots extends AppCompatActivity implements OnMapReadyCallback, N
                         //String[] point2 = point.split(",");
                         double lat1 = Double.parseDouble(latitude);
                         double lng1 = Double.parseDouble(longitude);
-
+Log.v("test",e.getString("id"));
                         //Marker melbourne =
                         Marker melbourne = mMap.addMarker(new MarkerOptions().title(e.getString("id")).position(new LatLng(lat1, lng1)).snippet(getResources().getString(R.string.Meer_info)));
                         melbourne.showInfoWindow();
@@ -282,5 +342,20 @@ public class AllSpots extends AppCompatActivity implements OnMapReadyCallback, N
         }
         GetJSON gj = new GetJSON();
         gj.execute(url);
+    }
+
+    //Run when jaar is chosen.
+    public void Jaar(View view) {
+
+        Spinner jaar_spinner = (Spinner) findViewById(R.id.jaar);
+        String jaar = jaar_spinner.getSelectedItem().toString();
+        ((Globals) getApplication()).setjaar(jaar);
+        Log.v("test",jaar);
+        //getJSON(JSON_URL);
+        mMap.clear();
+        getJSON(JSON_URL);
+        //Integer size = twoDim.size();
+        //Log.v("Test1","laatste");
+
     }
 }

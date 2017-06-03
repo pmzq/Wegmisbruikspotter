@@ -50,7 +50,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="13dp"
             android:backgroundTint="?android:attr/colorPressedHighlight"
-            android:onClick="Zoek"
             android:text="Zoek!"
             android:textSize="24sp" />
 
