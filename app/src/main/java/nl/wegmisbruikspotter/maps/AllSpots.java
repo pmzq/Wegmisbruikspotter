@@ -314,7 +314,7 @@ public class AllSpots extends AppCompatActivity implements OnMapReadyCallback, N
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                loading.dismiss();
+
 
                 //textViewJSON.setText(s);
                 try {
@@ -329,15 +329,18 @@ public class AllSpots extends AppCompatActivity implements OnMapReadyCallback, N
                         //String[] point2 = point.split(",");
                         double lat1 = Double.parseDouble(latitude);
                         double lng1 = Double.parseDouble(longitude);
-Log.v("test",e.getString("id"));
+
                         //Marker melbourne =
                         Marker melbourne = mMap.addMarker(new MarkerOptions().title(e.getString("id")).position(new LatLng(lat1, lng1)).snippet(getResources().getString(R.string.Meer_info)));
                         melbourne.showInfoWindow();
                     }
 
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                loading.dismiss();
             }
         }
         GetJSON gj = new GetJSON();

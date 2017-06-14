@@ -34,10 +34,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class Tab1Wegmisbruikers extends Fragment {
    // private static final String JSON_URL = "https://wegmisbruikspotter.000webhostapp.com/m_wegmisbruikers.php";
     private static final String JSON_URL = "http://www.wegmisbruikspotter.nl/m_wegmisbruikers.php";
+    private AdView mAdView;
 
     public Tab1Wegmisbruikers() {
 // Required empty public constructor
@@ -46,6 +49,8 @@ public class Tab1Wegmisbruikers extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
     }
 
@@ -68,6 +73,10 @@ public class Tab1Wegmisbruikers extends Fragment {
         spinYear.setAdapter(jaar_adapter);
         String jaar = Integer.toString(thisYear);
         ((Globals) getActivity().getApplication()).setjaar(jaar);
+
+        mAdView = (AdView) v.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         getJSON(JSON_URL, v);
 

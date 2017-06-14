@@ -18,6 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +41,7 @@ public class Tab3Automerk extends Fragment {
     }
 
     private static final String JSON_URL = "http://www.wegmisbruikspotter.nl/m_merk.php";
+    private AdView mAdView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,11 @@ public class Tab3Automerk extends Fragment {
         spinYear.setAdapter(jaar_adapter);
         String jaar = Integer.toString(thisYear);
         ((Globals) getActivity().getApplication()).setjaar(jaar);
+
+        //Load adds.
+        mAdView = (AdView) v.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         getJSON(JSON_URL, v);
 

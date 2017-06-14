@@ -35,6 +35,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -76,7 +80,7 @@ public class MainActivity extends AppCompatActivity
     public String File_name = "none";
     Context context = this;
     public static String URL = "http://www.wegmisbruikspotter.nl/upload_image.php";
-
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +141,11 @@ public class MainActivity extends AppCompatActivity
 
         //String facebookName = ((Globals) this.getApplication()).getfacebookName();
 
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
     private void printKeyHash() {
@@ -459,6 +468,12 @@ public class MainActivity extends AppCompatActivity
             //upload image
             if (File_path !="" ){
                 new uploadToServer().execute();
+            }
+
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            } else {
+                Log.d("TAG", "The interstitial wasn't loaded yet.");
             }
         }
     }

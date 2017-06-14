@@ -23,7 +23,6 @@ import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.ads.MobileAds;
 
 import java.util.Arrays;
 
@@ -160,7 +159,7 @@ public class MainLogin extends Activity {
                 Log.v("facebook - onError", e.getMessage());
             }
         });*/
-        MobileAds.initialize(this, "ca-app-pub-5114927773439743~5718884916");
+
     }
 
     @Override

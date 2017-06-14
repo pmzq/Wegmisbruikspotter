@@ -27,6 +27,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -55,6 +57,7 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
     private static final String JSON_URL = "http://www.wegmisbruikspotter.nl/m_zoek.php";
     //private static final String JSON_URL = "https://wegmisbruikspotter.000webhostapp.com/m_retreivespots.php";
     List<List<String>> twoDim = new ArrayList<List<String>>();
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +96,10 @@ public class Zoek extends AppCompatActivity implements NavigationView.OnNavigati
 
             Zoek1();
         }
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override
