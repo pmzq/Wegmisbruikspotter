@@ -8,18 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="nl.wegmisbruikspotter.maps.MainLogin"><![CDATA[
-
-        
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:id="@+id/info"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:textSize="18sp"
-            />        
-
-    ]]>
+    tools:context="nl.wegmisbruikspotter.maps.MainLogin">
 
     <com.facebook.login.widget.LoginButton android:layout_width="wrap_content"
     android:layout_height="wrap_content"

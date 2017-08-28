@@ -18,6 +18,10 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -26,6 +30,7 @@ public class Rankings extends AppCompatActivity implements NavigationView.OnNavi
 
     ViewPager simpleViewPager;
     TabLayout tabLayout;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -50,8 +50,6 @@ public class Tab1Wegmisbruikers extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
     }
 
     //@Override
@@ -69,6 +67,7 @@ public class Tab1Wegmisbruikers extends Fragment {
 
 
         final View v = inflater.inflate(R.layout.tab1_wegmisbruikers, container, false);
+
         Spinner spinYear = (Spinner) v.findViewById(R.id.jaar);
         spinYear.setAdapter(jaar_adapter);
         String jaar = Integer.toString(thisYear);

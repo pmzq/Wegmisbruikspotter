@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -36,6 +37,8 @@ public class MainLogin extends Activity {
     private CallbackManager callbackManager;
     private static final String TAG = "Test";
     public AccessToken test;
+    private AccessTokenTracker accessTokenTracker;
+    private ProfileTracker profileTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +46,31 @@ public class MainLogin extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_login);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        //FacebookSdk.sdkInitialize(getApplicationContext());
         //callbackManager = CallbackManager.Factory.create();
 
         setContentView(R.layout.activity_main_login);
-        info = (TextView)findViewById(R.id.info);
+        //info = (TextView)findViewById(R.id.info);
+
+        callbackManager = CallbackManager.Factory.create();
+        accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldToken, AccessToken newToken) {
+            }
+        };
+
+        profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
+                nextActivity(newProfile);
+            }
+        };
+        accessTokenTracker.startTracking();
+        profileTracker.startTracking();
+
         //loginButton = (LoginButton)findViewById(R.id.login_button);
         //LoginManager.getInstance().logOut();
-        Profile profile = Profile.getCurrentProfile();
+        /*Profile profile = Profile.getCurrentProfile();
         if (profile != null) {
             Log.v("test", "Logged, user name=" + profile.getFirstName() + " " + profile.getLastName());
             Log.v("test",AccessToken.getCurrentAccessToken().getUserId());
@@ -61,10 +81,76 @@ public class MainLogin extends Activity {
             startActivity(intent);
         } else {
             //Log.v(TAG, "Logged, user name=");
-        }
+        }*/
 
-        /*LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("public_profile");*/
+        LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
+        FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Profile profile = Profile.getCurrentProfile();
+                nextActivity(profile);
+                Toast.makeText(getApplicationContext(), "Logging in...", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancel() {
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+            }
+        };
+        loginButton.setReadPermissions("user_friends");
+        loginButton.registerCallback(callbackManager, callback);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Facebook login
+        Profile profile = Profile.getCurrentProfile();
+        nextActivity(profile);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    protected void onStop() {
+        super.onStop();
+        //Facebook login
+        accessTokenTracker.stopTracking();
+        profileTracker.stopTracking();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
+        super.onActivityResult(requestCode, responseCode, intent);
+        //Facebook login
+        callbackManager.onActivityResult(requestCode, responseCode, intent);
+
+    }
+
+    private void nextActivity(Profile profile){
+        if(profile != null){
+            //Intent main = new Intent(MainLogin.this, UserProfile.class);
+            ((Globals) getApplication()).setfacebookName(profile.getFirstName());
+            String facebookID = AccessToken.getCurrentAccessToken().getUserId();
+            ((Globals) getApplication()).setfacebookID(facebookID);
+
+            //main.putExtra("name", profile.getFirstName());
+            //main.putExtra("surname", profile.getLastName());
+            //main.putExtra("imageUrl", profile.getProfilePictureUri(200,200).toString());
+            //startActivity(main);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+    }
+
+        /*
+        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("public_profile");
         callbackManager = CallbackManager.Factory.create();
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             private ProfileTracker mProfileTracker;
@@ -75,7 +161,7 @@ public class MainLogin extends Activity {
                         @Override
                         protected void onCurrentProfileChanged(Profile profile, Profile profile2) {
                             // profile2 is the new profile
-                            //Log.v("facebook - profile", profile2.getFirstName());
+                            Log.v("facebook - profile", profile2.getFirstName());
                             Intent intent = new Intent(MainLogin.this, MainActivity.class);
 
                             String facebookID = getCurrentAccessToken().getUserId();
@@ -113,59 +199,12 @@ public class MainLogin extends Activity {
 
         });
 
-        /*loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-
-            private ProfileTracker mProfileTracker;
-
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                if(Profile.getCurrentProfile() == null) {
-                    mProfileTracker = new ProfileTracker() {
-                        @Override
-                        protected void onCurrentProfileChanged(Profile profile, Profile profile2) {
-                            // profile2 is the new profile
-                            Log.v("facebook - profile", profile2.getFirstName());
-                            Intent intent = new Intent(MainLogin.this, MainActivity.class);
-                            String facebookID = getCurrentAccessToken().getUserId();
-                            ((Globals) getApplication()).setfacebookID(facebookID);
-                            Log.v(TAG, "Logged, user name=" + profile2.getFirstName());
-                            ((Globals) getApplication()).setfacebookID(profile2.getFirstName());
-                            startActivity(intent);
-                            mProfileTracker.stopTracking();
-                        }
-                    };
-                    // no need to call startTracking() on mProfileTracker
-                    // because it is called by its constructor, internally.
-                }
-                else {
-                    Profile profile = Profile.getCurrentProfile();
-                    Log.v("facebook - profile", profile.getFirstName());
-                    Log.v(TAG, "Logged, user name=" + profile.getFirstName());
-                    String facebookID = getCurrentAccessToken().getUserId();
-                    ((Globals) getApplication()).setfacebookID(facebookID);
-                    ((Globals) getApplication()).setfacebookName(profile.getFirstName());
-                    Intent intent = new Intent(MainLogin.this, MainActivity.class);
-                    startActivity(intent);
-                }
-            }
-
-            @Override
-            public void onCancel() {
-                Log.v("facebook - onCancel", "cancelled");
-            }
-
-            @Override
-            public void onError(FacebookException e) {
-                Log.v("facebook - onError", e.getMessage());
-            }
-        });*/
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
+    }*/
 
 
 }

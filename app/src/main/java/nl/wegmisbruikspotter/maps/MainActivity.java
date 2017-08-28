@@ -141,11 +141,11 @@ public class MainActivity extends AppCompatActivity
 
         //String facebookName = ((Globals) this.getApplication()).getfacebookName();
 
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
-
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        MobileAds.initialize(this, "ca-app-pub-5114927773439743~5718884916");
+        //MobileAds.initialize(this, "ca-app-pub-5114927773439743/8672351312");
+        //mInterstitialAd = new InterstitialAd(this);
+        //mInterstitialAd.setAdUnitId("ca-app-pub-5114927773439743/8672351312");
+        //mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
     private void printKeyHash() {
